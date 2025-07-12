@@ -1,0 +1,37 @@
+import { SignupForm } from "@/components/auth/signup-form"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import Link from "next/link"
+import { Trophy } from "lucide-react"
+
+export default function SignupPage() {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-8">
+        <div className="text-center">
+          <Link href="/" className="flex items-center justify-center space-x-2 mb-6">
+            <Trophy className="h-8 w-8 text-primary" />
+            <span className="font-bold text-xl gradient-text">The Pitch Deck</span>
+          </Link>
+        </div>
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold text-center">Create Account</CardTitle>
+            <CardDescription className="text-center">Join The Pitch Deck community today</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <SignupForm />
+            <div className="mt-6 text-center">
+              <p className="text-sm text-gray-600">
+                Already have an account?{" "}
+                <Link href="/auth/login" className="font-medium text-primary hover:text-primary/80">
+                  Sign in here
+                </Link>
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  )
+}
