@@ -1,16 +1,22 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import Link from "next/link"
-import { Checkbox } from "@/components/ui/checkbox"
-import { toast } from "sonner"
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import Link from "next/link";
+import { Checkbox } from "@/components/ui/checkbox";
+import { toast } from "sonner";
 
 export function SignupForm() {
   const [formData, setFormData] = useState({
@@ -23,61 +29,61 @@ export function SignupForm() {
     school: "",
     grade: "",
     agreeToTerms: false,
-  })
-  const [isLoading, setIsLoading] = useState(false)
-  const router = useRouter()
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
-  const handleChange = (field: string, value: any) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
-  }
+  const handleChange = (field: string, value: unknown) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
       toast.error("Password mismatch", {
         description: "Please make sure your passwords match.",
-      })
-      return
+      });
+      return;
     }
 
     if (!formData.agreeToTerms) {
       toast.error("Terms not accepted", {
         description: "You must agree to the terms and conditions to continue.",
-      })
-      return
+      });
+      return;
     }
 
-    setIsLoading(true)
+    setIsLoading(true);
 
     // TODO: Implement actual registration logic
     try {
       // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
       toast.success("Account created successfully!", {
         description: "Welcome to The Pitch Deck.",
-      })
+      });
 
       // Redirect based on role
       switch (formData.role) {
         case "competitor":
-          router.push("/dashboard/competitor")
-          break
+          router.push("/dashboard/competitor");
+          break;
         case "organizer":
-          router.push("/dashboard/organizer")
-          break
+          router.push("/dashboard/organizer");
+          break;
         default:
-          router.push("/dashboard/competitor")
+          router.push("/dashboard/competitor");
       }
-    } catch (error) {
+    } catch {
       toast.error("Registration failed", {
         description: "Please try again later.",
-      })
+      });
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
@@ -129,7 +135,11 @@ export function SignupForm() {
 
       <div>
         <Label htmlFor="grade">Grade</Label>
-        <Select value={formData.grade} onValueChange={(value) => handleChange("grade", value)} required>
+        <Select
+          value={formData.grade}
+          onValueChange={(value) => handleChange("grade", value)}
+          required
+        >
           <SelectTrigger>
             <SelectValue placeholder="Select your grade" />
           </SelectTrigger>
@@ -144,7 +154,11 @@ export function SignupForm() {
 
       <div>
         <Label htmlFor="role">Role</Label>
-        <Select value={formData.role} onValueChange={(value) => handleChange("role", value)} required>
+        <Select
+          value={formData.role}
+          onValueChange={(value) => handleChange("role", value)}
+          required
+        >
           <SelectTrigger>
             <SelectValue placeholder="Select your role" />
           </SelectTrigger>
@@ -184,7 +198,9 @@ export function SignupForm() {
         <Checkbox
           id="agreeToTerms"
           checked={formData.agreeToTerms}
-          onCheckedChange={(checked) => handleChange("agreeToTerms", checked as boolean)}
+          onCheckedChange={(checked) =>
+            handleChange("agreeToTerms", checked as boolean)
+          }
         />
         <Label htmlFor="agreeToTerms" className="text-sm">
           I agree to the{" "}
@@ -203,5 +219,5 @@ export function SignupForm() {
         {isLoading ? "Creating Account..." : "Create Account"}
       </Button>
     </form>
-  )
+  );
 }

@@ -56,9 +56,11 @@ export function CompetitionFilters({
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">All Grades</SelectItem>
+            <SelectItem value="Pre-Secondary">Pre-Secondary</SelectItem>
             <SelectItem value="9-10">Grades 9-10</SelectItem>
             <SelectItem value="11-12">Grades 11-12</SelectItem>
             <SelectItem value="9-12">Grades 9-12</SelectItem>
+            <SelectItem value="Post-Secondary">Post-Secondary</SelectItem>
           </SelectContent>
         </Select>
 

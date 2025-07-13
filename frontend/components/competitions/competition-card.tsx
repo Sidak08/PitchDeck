@@ -1,51 +1,68 @@
-"use client"
-
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Calendar, Trophy, Users, ExternalLink } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
+import { useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Calendar, Trophy, Users, ExternalLink, Heart } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 interface Competition {
-  id: number
-  title: string
-  host: string
-  logo: string
-  gradeEligibility: string
-  deadline: string
-  prize: string
-  status: "open" | "closing-soon" | "closed"
-  description: string
-  applicationType: "internal" | "external"
-  applyUrl: string
+  id: number;
+  title: string;
+  host: string;
+  logo: string;
+  gradeEligibility: string;
+  deadline: string;
+  prize: string;
+  status: "open" | "closing-soon" | "closed";
+  description: string;
+  applicationType: "internal" | "external";
+  applyUrl: string;
 }
 
 interface CompetitionCardProps {
-  competition: Competition
+  competition: Competition;
+  onFavourite?: (competition: Competition) => void;
+  isFavourited?: boolean;
 }
 
-export function CompetitionCard({ competition }: CompetitionCardProps) {
+export function CompetitionCard({
+  competition,
+  onFavourite,
+  isFavourited,
+}: CompetitionCardProps) {
+  const [favourited, setFavourited] = useState(isFavourited ?? false);
+
   const getStatusColor = (status: string) => {
     switch (status) {
       case "open":
-        return "bg-green-100 text-green-800"
+        return "bg-green-100 text-green-800";
       case "closing-soon":
-        return "bg-yellow-100 text-yellow-800"
+        return "bg-yellow-100 text-yellow-800";
       case "closed":
-        return "bg-red-100 text-red-800"
+        return "bg-red-100 text-red-800";
       default:
-        return "bg-gray-100 text-gray-800"
+        return "bg-gray-100 text-gray-800";
     }
-  }
+  };
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("en-US", {
       month: "short",
       day: "numeric",
       year: "numeric",
-    })
-  }
+    });
+  };
+
+  const handleFavourite = () => {
+    setFavourited((prev) => !prev);
+    if (onFavourite) onFavourite(competition);
+  };
 
   return (
     <Card className="hover:shadow-lg transition-shadow duration-300 cursor-pointer">
@@ -60,16 +77,39 @@ export function CompetitionCard({ competition }: CompetitionCardProps) {
               className="rounded-lg"
             />
             <div>
-              <h3 className="font-semibold text-lg line-clamp-2">{competition.title}</h3>
+              <h3 className="font-semibold text-lg line-clamp-2">
+                {competition.title}
+              </h3>
               <p className="text-sm text-gray-600">{competition.host}</p>
             </div>
           </div>
-          <Badge className={getStatusColor(competition.status)}>{competition.status.replace("-", " ")}</Badge>
+          <div className="flex items-center space-x-2">
+            <Badge className={getStatusColor(competition.status)}>
+              {competition.status.replace("-", " ")}
+            </Badge>
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label={
+                favourited ? "Remove from favourites" : "Add to favourites"
+              }
+              onClick={handleFavourite}
+            >
+              <Heart
+                className={`h-5 w-5 ${
+                  favourited ? "text-red-500 fill-red-500" : "text-gray-400"
+                }`}
+                fill={favourited ? "currentColor" : "none"}
+              />
+            </Button>
+          </div>
         </div>
       </CardHeader>
 
       <CardContent className="space-y-3">
-        <p className="text-sm text-gray-600 line-clamp-2">{competition.description}</p>
+        <p className="text-sm text-gray-600 line-clamp-2">
+          {competition.description}
+        </p>
 
         <div className="flex items-center space-x-4 text-sm text-gray-600">
           <div className="flex items-center space-x-1">
@@ -100,7 +140,12 @@ export function CompetitionCard({ competition }: CompetitionCardProps) {
               <Button className="w-full">Apply Now</Button>
             </Link>
           ) : (
-            <a href={competition.applyUrl} target="_blank" rel="noopener noreferrer" className="flex-1">
+            <a
+              href={competition.applyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1"
+            >
               <Button className="w-full">
                 Apply
                 <ExternalLink className="h-4 w-4 ml-1" />
@@ -110,5 +155,5 @@ export function CompetitionCard({ competition }: CompetitionCardProps) {
         </div>
       </CardFooter>
     </Card>
-  )
+  );
 }

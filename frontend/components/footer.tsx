@@ -1,5 +1,5 @@
-import Link from "next/link"
-import { Trophy, Mail } from "lucide-react"
+import Link from "next/link";
+import { Trophy, Mail } from "lucide-react";
 
 export function Footer() {
   return (
@@ -13,8 +13,8 @@ export function Footer() {
               <span className="font-bold text-xl">The Pitch Deck</span>
             </div>
             <p className="text-gray-400 mb-4 max-w-md">
-              The all-in-one platform for high school students to discover, apply to, and host business case
-              competitions.
+              The all-in-one platform to discover, apply to, and host business
+              case competitions.
             </p>
             <div className="flex space-x-4">
               <div className="flex items-center space-x-2 text-gray-400">
@@ -29,22 +29,34 @@ export function Footer() {
             <h3 className="font-semibold text-lg mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/competitions" className="text-gray-400 hover:text-white transition-colors">
+                <Link
+                  href="/competitions"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   Competitions
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-gray-400 hover:text-white transition-colors">
+                <Link
+                  href="/about"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/winners" className="text-gray-400 hover:text-white transition-colors">
+                <Link
+                  href="/winners"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   Past Winners
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-gray-400 hover:text-white transition-colors">
+                <Link
+                  href="/contact"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   Contact
                 </Link>
               </li>
@@ -56,27 +68,42 @@ export function Footer() {
             <h3 className="font-semibold text-lg mb-4">For Students</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/auth/signup" className="text-gray-400 hover:text-white transition-colors">
+                <Link
+                  href="/auth/signup"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   Sign Up
                 </Link>
               </li>
               <li>
-                <Link href="/resources" className="text-gray-400 hover:text-white transition-colors">
+                <Link
+                  href="/resources"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   Resources
                 </Link>
               </li>
               <li>
-                <Link href="/help" className="text-gray-400 hover:text-white transition-colors">
+                <Link
+                  href="/help"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   Help Center
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="text-gray-400 hover:text-white transition-colors">
+                <Link
+                  href="/terms"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   Terms of Service
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className="text-gray-400 hover:text-white transition-colors">
+                <Link
+                  href="/privacy"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   Privacy Policy
                 </Link>
               </li>
@@ -85,9 +112,9 @@ export function Footer() {
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; 2024 The Pitch Deck. All rights reserved.</p>
+          <p>&copy; 2025 The Pitch Deck. All rights reserved.</p>
         </div>
       </div>
     </footer>
-  )
+  );
 }

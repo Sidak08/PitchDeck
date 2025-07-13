@@ -12,7 +12,7 @@ export function HeroSection() {
           <h1 className="text-4xl sm:text-6xl font-bold text-gray-900 mb-6">
             <span className="gradient-text">The All-in-One Platform</span>
             <br />
-            for Case Competitors
+            for Case Competitions
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
             Discover, apply to, and host business case competitions. Connect
@@ -32,7 +32,7 @@ export function HeroSection() {
                 variant="outline"
                 className="text-lg px-8 py-3 bg-transparent"
               >
-                Sign Up for The Pitch Deck's Competition
+                Sign Up for The Pitch Deck&apos;s Competition
               </Button>
             </Link>
           </div>
@@ -43,21 +43,21 @@ export function HeroSection() {
               <div className="flex justify-center mb-4">
                 <Trophy className="h-12 w-12 text-primary" />
               </div>
-              <h3 className="text-3xl font-bold text-gray-900 mb-2">50+</h3>
+              <h3 className="text-3xl font-bold text-gray-900 mb-2">x</h3>
               <p className="text-gray-600">Active Competitions</p>
             </div>
             <div className="text-center">
               <div className="flex justify-center mb-4">
                 <Users className="h-12 w-12 text-primary" />
               </div>
-              <h3 className="text-3xl font-bold text-gray-900 mb-2">2,000+</h3>
+              <h3 className="text-3xl font-bold text-gray-900 mb-2">y</h3>
               <p className="text-gray-600">Student Competitors</p>
             </div>
             <div className="text-center">
               <div className="flex justify-center mb-4">
                 <Award className="h-12 w-12 text-primary" />
               </div>
-              <h3 className="text-3xl font-bold text-gray-900 mb-2">$100K+</h3>
+              <h3 className="text-3xl font-bold text-gray-900 mb-2">$z</h3>
               <p className="text-gray-600">Total Prize Money</p>
             </div>
           </div>
