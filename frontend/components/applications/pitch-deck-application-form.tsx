@@ -1,17 +1,29 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Checkbox } from "@/components/ui/checkbox"
-import { toast } from "sonner"
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
+import { toast } from "sonner";
 
 export function PitchDeckApplicationForm() {
   const [formData, setFormData] = useState({
@@ -29,50 +41,52 @@ export function PitchDeckApplicationForm() {
     emergencyContact: "",
     emergencyPhone: "",
     agreeToTerms: false,
-  })
-  const [isLoading, setIsLoading] = useState(false)
-  const router = useRouter()
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const handleChange = (field: string, value: string | boolean) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
-  }
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (!formData.agreeToTerms) {
       toast.error("Terms and conditions required", {
         description: "Please agree to the terms and conditions to continue.",
-      })
-      return
+      });
+      return;
     }
 
-    setIsLoading(true)
+    setIsLoading(true);
 
     // TODO: Implement actual application submission logic
     try {
       // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 2000))
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
       toast.success("Application submitted successfully!", {
         description: "We'll review your application and get back to you soon.",
-      })
+      });
 
-      router.push("/apply/pitch-deck/success")
-    } catch (error) {
+      router.push("/apply/pitch-deck/success");
+    } catch {
       toast.error("Submission failed", {
         description: "Please try again later.",
-      })
+      });
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <Card>
       <CardHeader>
         <CardTitle>Application Form</CardTitle>
-        <CardDescription>Please fill out all required fields to complete your application.</CardDescription>
+        <CardDescription>
+          Please fill out all required fields to complete your application.
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -141,7 +155,11 @@ export function PitchDeckApplicationForm() {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <Label htmlFor="grade">Current Grade *</Label>
-                <Select value={formData.grade} onValueChange={(value) => handleChange("grade", value)} required>
+                <Select
+                  value={formData.grade}
+                  onValueChange={(value) => handleChange("grade", value)}
+                  required
+                >
                   <SelectTrigger>
                     <SelectValue placeholder="Select grade" />
                   </SelectTrigger>
@@ -169,18 +187,24 @@ export function PitchDeckApplicationForm() {
             <h3 className="text-lg font-semibold">Experience & Essays</h3>
 
             <div>
-              <Label htmlFor="previousExperience">Previous Case Competition Experience</Label>
+              <Label htmlFor="previousExperience">
+                Previous Case Competition Experience
+              </Label>
               <Textarea
                 id="previousExperience"
                 value={formData.previousExperience}
-                onChange={(e) => handleChange("previousExperience", e.target.value)}
+                onChange={(e) =>
+                  handleChange("previousExperience", e.target.value)
+                }
                 placeholder="Describe any previous case competition experience..."
                 rows={4}
               />
             </div>
 
             <div>
-              <Label htmlFor="whyInterested">Why are you interested in The Pitch Deck Championship? *</Label>
+              <Label htmlFor="whyInterested">
+                Why are you interested in The Pitch Deck Championship? *
+              </Label>
               <Textarea
                 id="whyInterested"
                 value={formData.whyInterested}
@@ -193,12 +217,17 @@ export function PitchDeckApplicationForm() {
 
             <div>
               <Label htmlFor="teamPreference">Team Formation Preference</Label>
-              <Select value={formData.teamPreference} onValueChange={(value) => handleChange("teamPreference", value)}>
+              <Select
+                value={formData.teamPreference}
+                onValueChange={(value) => handleChange("teamPreference", value)}
+              >
                 <SelectTrigger>
                   <SelectValue placeholder="Select preference" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="individual">Compete individually</SelectItem>
+                  <SelectItem value="individual">
+                    Compete individually
+                  </SelectItem>
                   <SelectItem value="team">Form a team</SelectItem>
                   <SelectItem value="either">Either is fine</SelectItem>
                 </SelectContent>
@@ -215,7 +244,9 @@ export function PitchDeckApplicationForm() {
               <Input
                 id="emergencyContact"
                 value={formData.emergencyContact}
-                onChange={(e) => handleChange("emergencyContact", e.target.value)}
+                onChange={(e) =>
+                  handleChange("emergencyContact", e.target.value)
+                }
                 required
               />
             </div>
@@ -232,11 +263,15 @@ export function PitchDeckApplicationForm() {
             </div>
 
             <div>
-              <Label htmlFor="dietaryRestrictions">Dietary Restrictions/Allergies</Label>
+              <Label htmlFor="dietaryRestrictions">
+                Dietary Restrictions/Allergies
+              </Label>
               <Textarea
                 id="dietaryRestrictions"
                 value={formData.dietaryRestrictions}
-                onChange={(e) => handleChange("dietaryRestrictions", e.target.value)}
+                onChange={(e) =>
+                  handleChange("dietaryRestrictions", e.target.value)
+                }
                 placeholder="Please list any dietary restrictions or allergies..."
                 rows={2}
               />
@@ -248,7 +283,9 @@ export function PitchDeckApplicationForm() {
             <Checkbox
               id="agreeToTerms"
               checked={formData.agreeToTerms}
-              onCheckedChange={(checked) => handleChange("agreeToTerms", checked as boolean)}
+              onCheckedChange={(checked) =>
+                handleChange("agreeToTerms", checked as boolean)
+              }
             />
             <Label htmlFor="agreeToTerms" className="text-sm">
               I agree to the terms and conditions and privacy policy *
@@ -261,5 +298,5 @@ export function PitchDeckApplicationForm() {
         </form>
       </CardContent>
     </Card>
-  )
+  );
 }

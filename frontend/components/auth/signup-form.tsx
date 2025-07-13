@@ -17,6 +17,7 @@ import {
 import Link from "next/link";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
+import axios from "axios";
 
 export function SignupForm() {
   const [formData, setFormData] = useState({
@@ -28,8 +29,10 @@ export function SignupForm() {
     role: "",
     school: "",
     grade: "",
-    agreeToTerms: false,
+    approved: true,
+    favourites: [],
   });
+  const [agreeToTerms, setAgreeToTerms] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
@@ -47,7 +50,7 @@ export function SignupForm() {
       return;
     }
 
-    if (!formData.agreeToTerms) {
+    if (!agreeToTerms) {
       toast.error("Terms not accepted", {
         description: "You must agree to the terms and conditions to continue.",
       });
@@ -56,29 +59,38 @@ export function SignupForm() {
 
     setIsLoading(true);
 
-    // TODO: Implement actual registration logic
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
+      await axios.post("http://localhost:5000/api/auth/signup", {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        password: formData.password,
+        role: formData.role,
+        school: formData.school,
+        grade: formData.grade,
+        approved: formData.approved,
+        favourites: formData.favourites,
+      });
       toast.success("Account created successfully!", {
         description: "Welcome to The Pitch Deck.",
       });
-
-      // Redirect based on role
       switch (formData.role) {
         case "competitor":
           router.push("/dashboard/competitor");
           break;
         case "organizer":
-          router.push("/dashboard/organizer");
+          router.push("/");
           break;
         default:
           router.push("/dashboard/competitor");
       }
-    } catch {
+    } catch (err) {
+      let errorMsg = "Please try again later.";
+      if (axios.isAxiosError(err) && err.response?.data?.message) {
+        errorMsg = err.response.data.message;
+      }
       toast.error("Registration failed", {
-        description: "Please try again later.",
+        description: errorMsg,
       });
     } finally {
       setIsLoading(false);
@@ -156,7 +168,10 @@ export function SignupForm() {
         <Label htmlFor="role">Role</Label>
         <Select
           value={formData.role}
-          onValueChange={(value) => handleChange("role", value)}
+          onValueChange={(value) => {
+            handleChange("role", value);
+            handleChange("approved", value === "organizer" ? false : true);
+          }}
           required
         >
           <SelectTrigger>
@@ -194,27 +209,33 @@ export function SignupForm() {
       </div>
 
       {/* Terms and Conditions */}
-      <div className="flex items-center space-x-2">
+      <div className="flex items-center space-x-2 text-sm">
         <Checkbox
           id="agreeToTerms"
-          checked={formData.agreeToTerms}
-          onCheckedChange={(checked) =>
-            handleChange("agreeToTerms", checked as boolean)
-          }
+          checked={agreeToTerms}
+          onCheckedChange={(checked) => setAgreeToTerms(!!checked)}
+          required
         />
         <Label htmlFor="agreeToTerms" className="text-sm">
           I agree to the{" "}
           <Link href="/terms" className="text-primary hover:underline">
-            terms and conditions
-          </Link>{" "}
-          and{" "}
+            T&C
+          </Link>
+          {" and "}
           <Link href="/privacy" className="text-primary hover:underline">
             privacy policy
-          </Link>{" "}
-          *
+          </Link>
         </Label>
       </div>
-
+      {formData.role === "organizer" && (
+        <div className="bg-yellow-100 border-l-4 border-yellow-400 text-yellow-800 p-3 rounded text-sm mb-2">
+          If you want to be an organizer, you must contact us at{" "}
+          <a href="mailto:example@site.com" className="underline font-medium">
+            example@site.com
+          </a>{" "}
+          to get approved for an account.
+        </div>
+      )}
       <Button type="submit" className="w-full" disabled={isLoading}>
         {isLoading ? "Creating Account..." : "Create Account"}
       </Button>

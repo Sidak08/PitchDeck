@@ -8,26 +8,30 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
+import axios from "axios";
 
 export function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [role, setRole] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-
-    // TODO: Implement actual authentication logic
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const res = await axios.post(
+        "http://localhost:5000/api/auth/login",
+        {
+          email,
+          password,
+        },
+        { withCredentials: true }
+      );
 
-      // Mock role-based redirect
-      switch (role) {
+      const user = res.data.user;
+      // Redirect based on user.role
+      switch (user.role) {
         case "competitor":
           router.push("/dashboard/competitor");
           break;
@@ -37,13 +41,16 @@ export function LoginForm() {
         default:
           router.push("/dashboard/competitor");
       }
-
       toast.success("Login successful!", {
         description: "Welcome back to The Pitch Deck.",
       });
-    } catch {
+    } catch (err) {
+      let errorMsg = "Please check your credentials and try again.";
+      if (axios.isAxiosError(err) && err.response?.data?.message) {
+        errorMsg = err.response.data.message;
+      }
       toast.error("Login failed", {
-        description: "Please check your credentials and try again.",
+        description: errorMsg,
       });
     } finally {
       setIsLoading(false);

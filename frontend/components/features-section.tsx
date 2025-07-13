@@ -48,13 +48,13 @@ const features = [
 
 export function FeaturesSection() {
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
+    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900 dark:text-card-foreground">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 dark:text-card-foreground">
             Everything You Need to Succeed
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto dark:text-gray-300">
             From discovering competitions to hosting your own, we provide all
             the tools you need for case competition success.
           </p>

@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -11,22 +10,26 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Search, Filter } from "lucide-react";
+import { Search } from "lucide-react";
 
 interface CompetitionFiltersProps {
   onFiltersChange: (filters: {
     searchTerm: string;
     gradeFilter: string;
     statusFilter: string;
+    showFavourites?: boolean;
   }) => void;
+  showFavouritesToggle?: boolean;
 }
 
 export function CompetitionFilters({
   onFiltersChange,
+  showFavouritesToggle,
 }: CompetitionFiltersProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [gradeFilter, setGradeFilter] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
+  const [showFavourites, setShowFavourites] = useState(false);
 
   // Update filters when any value changes
   React.useEffect(() => {
@@ -34,8 +37,9 @@ export function CompetitionFilters({
       searchTerm,
       gradeFilter,
       statusFilter,
+      showFavourites,
     });
-  }, [searchTerm, gradeFilter, statusFilter, onFiltersChange]);
+  }, [searchTerm, gradeFilter, statusFilter, showFavourites, onFiltersChange]);
 
   return (
     <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-sm border border-border mb-8">
@@ -76,10 +80,19 @@ export function CompetitionFilters({
           </SelectContent>
         </Select>
 
-        <Button variant="outline" className="w-full lg:w-auto bg-transparent">
-          <Filter className="h-4 w-4 mr-2" />
-          More Filters
-        </Button>
+        {showFavouritesToggle && (
+          <button
+            type="button"
+            className={`px-4 py-2 rounded-md border text-sm font-medium transition-colors ${
+              showFavourites
+                ? "bg-primary text-white"
+                : "bg-gray-100 text-gray-700"
+            }`}
+            onClick={() => setShowFavourites((prev) => !prev)}
+          >
+            {showFavourites ? "Showing Favourites" : "Show Favourites"}
+          </button>
+        )}
       </div>
     </div>
   );

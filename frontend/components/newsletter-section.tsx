@@ -36,15 +36,15 @@ export function NewsletterSection() {
   };
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-primary">
+    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-primary dark:bg-gray-900 dark:text-card-foreground">
       <div className="max-w-4xl mx-auto text-center">
         <div className="flex justify-center mb-6">
           <Mail className="h-12 w-12 text-white" />
         </div>
-        <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+        <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 dark:text-card-foreground">
           Stay in the Loop
         </h2>
-        <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+        <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto dark:text-gray-300">
           Get notified about new competitions, application deadlines, and
           exclusive opportunities for case competitors.
         </p>

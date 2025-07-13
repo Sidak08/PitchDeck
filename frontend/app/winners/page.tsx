@@ -1,9 +1,9 @@
-import { Navigation } from "@/components/navigation"
-import { Footer } from "@/components/footer"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Trophy, Award, Calendar, School } from "lucide-react"
-import Image from "next/image"
+import { Navigation } from "@/components/navigation";
+import { Footer } from "@/components/footer";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Trophy, Award, Calendar, School } from "lucide-react";
+import Image from "next/image";
 
 // TODO: Replace with actual data from backend
 const winners = [
@@ -60,7 +60,8 @@ const winners = [
     category: "Second Place",
     image: "/placeholder.svg?height=200&width=200",
     caseTitle: "Healthcare Innovation Strategy",
-    quote: "The competition connected me with mentors who continue to guide my academic and career journey.",
+    quote:
+      "The competition connected me with mentors who continue to guide my academic and career journey.",
   },
   {
     id: 5,
@@ -73,7 +74,8 @@ const winners = [
     category: "Grand Prize Winner",
     image: "/placeholder.svg?height=200&width=200",
     caseTitle: "Global Market Entry Strategy",
-    quote: "Winning The Pitch Deck Championship was a life-changing experience that opened doors to top universities.",
+    quote:
+      "Winning The Pitch Deck Championship was a life-changing experience that opened doors to top universities.",
   },
   {
     id: 6,
@@ -86,16 +88,17 @@ const winners = [
     category: "First Place",
     image: "/placeholder.svg?height=200&width=200",
     caseTitle: "Financial Services Innovation",
-    quote: "The rigorous analysis required for this competition prepared me for advanced coursework and internships.",
+    quote:
+      "The rigorous analysis required for this competition prepared me for advanced coursework and internships.",
   },
-]
+];
 
 const stats = [
   { label: "Total Winners", value: "150+", icon: Trophy },
   { label: "Prize Money Awarded", value: "$500K+", icon: Award },
   { label: "Competitions Hosted", value: "75+", icon: Calendar },
   { label: "Partner Schools", value: "50+", icon: School },
-]
+];
 
 export default function WinnersPage() {
   return (
@@ -109,7 +112,8 @@ export default function WinnersPage() {
             <span className="gradient-text">Celebrating Our Champions</span>
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
-            Meet the exceptional students who have excelled in case competitions and are shaping the future of business.
+            Meet the exceptional students who have excelled in case competitions
+            and are shaping the future of business.
           </p>
         </div>
       </section>
@@ -119,15 +123,22 @@ export default function WinnersPage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-shadow duration-300">
+              <Card
+                key={index}
+                className="text-center hover:shadow-lg transition-shadow duration-300"
+              >
                 <CardContent className="p-6">
                   <div className="flex justify-center mb-4">
                     <div className="p-3 bg-primary/10 rounded-lg">
                       <stat.icon className="h-8 w-8 text-primary" />
                     </div>
                   </div>
-                  <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{stat.value}</div>
-                  <p className="text-gray-600 dark:text-gray-300">{stat.label}</p>
+                  <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                    {stat.value}
+                  </div>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    {stat.label}
+                  </p>
                 </CardContent>
               </Card>
             ))}
@@ -139,16 +150,22 @@ export default function WinnersPage() {
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Recent Winners</h2>
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              Recent Winners
+            </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              These outstanding students have demonstrated exceptional analytical skills, creativity, and leadership in
-              their competitions.
+              These outstanding students have demonstrated exceptional
+              analytical skills, creativity, and leadership in their
+              competitions.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {winners.map((winner) => (
-              <Card key={winner.id} className="hover:shadow-lg transition-shadow duration-300">
+              <Card
+                key={winner.id}
+                className="hover:shadow-lg transition-shadow duration-300"
+              >
                 <CardContent className="p-6">
                   <div className="flex items-start space-x-4 mb-4">
                     <div className="relative w-16 h-16 flex-shrink-0">
@@ -160,12 +177,18 @@ export default function WinnersPage() {
                       />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-lg text-gray-900 dark:text-white mb-1">{winner.name}</h3>
+                      <h3 className="font-semibold text-lg text-gray-900 dark:text-white mb-1">
+                        {winner.name}
+                      </h3>
                       <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
                         {winner.school} • Grade {winner.grade}
                       </p>
                       <Badge
-                        variant={winner.category === "Grand Prize Winner" ? "default" : "secondary"}
+                        variant={
+                          winner.category === "Grand Prize Winner"
+                            ? "default"
+                            : "secondary"
+                        }
                         className="text-xs"
                       >
                         {winner.category}
@@ -175,17 +198,25 @@ export default function WinnersPage() {
 
                   <div className="space-y-3">
                     <div>
-                      <h4 className="font-medium text-gray-900 dark:text-white">{winner.competition}</h4>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">{winner.caseTitle}</p>
+                      <h4 className="font-medium text-gray-900 dark:text-white">
+                        {winner.competition}
+                      </h4>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        {winner.caseTitle}
+                      </p>
                     </div>
 
                     <div className="flex justify-between items-center text-sm">
-                      <span className="text-gray-600 dark:text-gray-400">{winner.year}</span>
-                      <span className="font-semibold text-green-600 dark:text-green-400">{winner.prize}</span>
+                      <span className="text-gray-600 dark:text-gray-400">
+                        {winner.year}
+                      </span>
+                      <span className="font-semibold text-green-600 dark:text-green-400">
+                        {winner.prize}
+                      </span>
                     </div>
 
                     <blockquote className="text-sm text-gray-600 dark:text-gray-300 italic border-l-4 border-primary pl-3">
-                      "{winner.quote}"
+                      &quot;{winner.quote}&quot;
                     </blockquote>
                   </div>
                 </CardContent>
@@ -198,9 +229,12 @@ export default function WinnersPage() {
       {/* Call to Action */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-primary">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">Ready to Join Our Winners?</h2>
+          <h2 className="text-3xl font-bold text-white mb-4">
+            Ready to Join Our Winners?
+          </h2>
           <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-            Start your journey today by exploring our competitions and taking the first step toward business excellence.
+            Start your journey today by exploring our competitions and taking
+            the first step toward business excellence.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
@@ -221,5 +255,5 @@ export default function WinnersPage() {
 
       <Footer />
     </div>
-  )
+  );
 }
