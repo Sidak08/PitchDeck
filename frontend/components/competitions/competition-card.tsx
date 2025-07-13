@@ -174,8 +174,8 @@ export function CompetitionCard({
       </Card>
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <Dialog.Overlay className="fixed inset-0 bg-black/40 dark:bg-black/80 backdrop-blur-sm z-50" />
-        <Dialog.Content className="fixed inset-0 flex items-center justify-center z-50 animate-fade-in animate-scale-up bg-white dark:bg-card text-card-foreground dark:text-card-foreground rounded-xl shadow-xl">
-          <Card className="max-w-lg w-full p-6 relative bg-white dark:bg-card text-card-foreground dark:text-card-foreground">
+        <Dialog.Content className="fixed inset-0 flex items-center justify-center z-50 animate-fade-in animate-scale-up">
+          <Card className="max-w-lg w-full p-6 relative bg-white dark:bg-card text-card-foreground dark:text-card-foreground shadow-xl">
             <Button
               variant="ghost"
               size="icon"
