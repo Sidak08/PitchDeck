@@ -47,7 +47,7 @@ export function CompetitorDashboard() {
           })
           .then((favRes) => {
             setFavourites(
-              favRes.data.favourites.map((fav: { _id: string }) => fav._id)
+              favRes.data.favourites.map((fav: { _id: string }) => fav._id),
             );
           })
           .catch(() => {
@@ -91,14 +91,14 @@ export function CompetitorDashboard() {
     setFavourites((prev) =>
       prev.includes(competitionId)
         ? prev.filter((id) => id !== competitionId)
-        : [...prev, competitionId]
+        : [...prev, competitionId],
     );
     // Sync with backend
     try {
       await axios.post(
         "http://localhost:5000/api/auth/favourites",
         { competitionId },
-        { withCredentials: true }
+        { withCredentials: true },
       );
     } catch {
       toast.error("Failed to update favourites. Please try again.");
@@ -107,19 +107,21 @@ export function CompetitorDashboard() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900">
-          {`Welcome back${firstName ? ", " + firstName : ""}!`}
-        </h1>
-        <p className="text-gray-600">
-          Here&apos;s what&apos;s happening with your case competitions.
-        </p>
+      <div className="sticky top-16 z-20 pt-6 pb-4 bg-[#D9D9D9] dark:bg-gradient-to-br dark:from-[#102338] dark:via-[#152a45] dark:to-[#193252] mb-2">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+            {`Welcome back${firstName ? ", " + firstName : ""}!`}
+          </h1>
+          <p className="text-gray-600 dark:text-gray-300">
+            Here&apos;s what&apos;s happening with your case competitions.
+          </p>
+        </div>
       </div>
       <CompetitionFilters
         onFiltersChange={setFilters}
         showFavouritesToggle={true}
       />
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredCompetitions.map((comp) => (
           <CompetitionCard
             key={comp._id}

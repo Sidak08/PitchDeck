@@ -14,10 +14,10 @@ export default function CompetitionsPage() {
   });
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen flex flex-col">
       <Navigation />
-      <div className="pt-20 pb-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+      <div className="flex-1 pt-20 pb-16 px-4 sm:px-6 lg:px-8 w-full bg-[#D9D9D9] dark:bg-gradient-to-br dark:from-[#102338] dark:via-[#152a45] dark:to-[#193252]">
+        <div className="w-full mx-auto">
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
               Case Competitions
@@ -32,7 +32,7 @@ export default function CompetitionsPage() {
           <CompetitionGrid filters={filters} />
         </div>
       </div>
-      <Footer />
+      <Footer className="mt-auto" />
     </div>
   );
 }

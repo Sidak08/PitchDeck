@@ -46,7 +46,7 @@ export function Navigation() {
       await axios.post(
         "http://localhost:5000/api/auth/logout",
         {},
-        { withCredentials: true }
+        { withCredentials: true },
       );
       setIsLoggedIn(false);
       setUser(null);
@@ -70,7 +70,7 @@ export function Navigation() {
   );
 
   return (
-    <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-border dark:bg-gray-900/80 dark:text-card-foreground">
+    <nav className="fixed top-0 w-full bg-[#D9D9D9]/90 backdrop-blur-md z-50 border-b border-[#19613F]/20 dark:bg-gray-900/80 dark:border-[#2CA15F]/30 dark:text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
@@ -81,7 +81,7 @@ export function Navigation() {
               legacyBehavior
             >
               <a className="flex items-center space-x-2">
-                <Trophy className="h-8 w-8 text-primary" />
+                <Trophy className="h-8 w-8 text-[#19613F]" />
                 <span className="font-bold text-xl gradient-text">
                   The Pitch Deck
                 </span>
@@ -94,19 +94,19 @@ export function Navigation() {
             <div className="ml-10 flex items-baseline space-x-4">
               <Link
                 href="/competitions"
-                className="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                className="text-black hover:text-[#2CA15F] px-3 py-2 rounded-md text-sm font-medium transition-colors dark:text-white"
               >
                 Competitions
               </Link>
               <Link
                 href="/about"
-                className="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                className="text-black hover:text-[#2CA15F] px-3 py-2 rounded-md text-sm font-medium transition-colors dark:text-white"
               >
                 About
               </Link>
               <Link
                 href="/winners"
-                className="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                className="text-black hover:text-[#2CA15F] px-3 py-2 rounded-md text-sm font-medium transition-colors dark:text-white"
               >
                 Winners
               </Link>
@@ -117,25 +117,25 @@ export function Navigation() {
                       user.role === "competitor"
                         ? "/dashboard/competitor"
                         : user.role === "organizer"
-                        ? "/dashboard/organizer"
-                        : "/dashboard/admin"
+                          ? "/dashboard/organizer"
+                          : "/dashboard/admin"
                     }
                   >
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="rounded-full bg-gray-200"
+                      className="rounded-full bg-[#D9D9D9]"
                     >
-                      <span className="font-bold text-primary">
+                      <span className="font-bold text-[#19613F]">
                         {user.firstName.charAt(0).toUpperCase()}
                       </span>
                     </Button>
                   </Link>
                   <div className="flex flex-col ml-2">
-                    <span className="text-sm font-semibold text-gray-900 dark:text-white">
+                    <span className="text-sm font-semibold text-black dark:text-white">
                       {user.firstName}
                     </span>
-                    <span className="text-xs text-gray-500 dark:text-gray-400">
+                    <span className="text-xs text-[#19613F] dark:text-gray-400">
                       {user.email}
                     </span>
                   </div>
@@ -152,13 +152,13 @@ export function Navigation() {
                 <>
                   <Link
                     href="/auth/login"
-                    className="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                    className="text-black hover:text-[#2CA15F] px-3 py-2 rounded-md text-sm font-medium transition-colors dark:text-white"
                   >
                     Log In
                   </Link>
                   <Link
                     href="/auth/signup"
-                    className="text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors border border-primary"
+                    className="text-[#19613F] px-3 py-2 rounded-md text-sm font-medium transition-colors border border-[#19613F] hover:bg-[#19613F] hover:text-white dark:text-white dark:border-white"
                   >
                     Sign Up
                   </Link>
@@ -177,7 +177,7 @@ export function Navigation() {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-primary hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
+              className="inline-flex items-center justify-center p-2 rounded-md text-black hover:text-[#2CA15F] hover:bg-[#D9D9D9] focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#19613F] dark:text-white"
             >
               {isOpen ? (
                 <X className="h-6 w-6" />
@@ -192,27 +192,27 @@ export function Navigation() {
       {/* Mobile Navigation */}
       {isOpen && (
         <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-b border-border dark:bg-gray-900">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-[#D9D9D9] border-b border-[#19613F]/20 dark:bg-gray-900">
             <Link
               href="/competitions"
-              className="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium"
+              className="text-black hover:text-[#2CA15F] block px-3 py-2 rounded-md text-base font-medium dark:text-white"
             >
               Competitions
             </Link>
             <Link
               href="/about"
-              className="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium"
+              className="text-black hover:text-[#2CA15F] block px-3 py-2 rounded-md text-base font-medium dark:text-white"
             >
               About
             </Link>
             <Link
               href="/winners"
-              className="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium"
+              className="text-black hover:text-[#2CA15F] block px-3 py-2 rounded-md text-base font-medium dark:text-white"
             >
               Winners
             </Link>
             <div className="pt-4 pb-3 border-t border-gray-200">
-              <div className="flex items-center px-3 space-x-3">
+              <div className="flex items-center px-3 space-x-3 border-t border-[#19613F]/20">
                 <ThemeToggle />
                 {isLoggedIn && user ? (
                   <div className="flex items-center space-x-2">
@@ -221,25 +221,25 @@ export function Navigation() {
                         user.role === "competitor"
                           ? "/dashboard/competitor"
                           : user.role === "organizer"
-                          ? "/dashboard/organizer"
-                          : "/dashboard/admin"
+                            ? "/dashboard/organizer"
+                            : "/dashboard/admin"
                       }
                     >
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="rounded-full bg-gray-200"
+                        className="rounded-full bg-[#D9D9D9]"
                       >
-                        <span className="font-bold text-primary">
+                        <span className="font-bold text-[#19613F]">
                           {user.firstName.charAt(0).toUpperCase()}
                         </span>
                       </Button>
                     </Link>
                     <div className="flex flex-col ml-2">
-                      <span className="text-sm font-semibold text-gray-900 dark:text-white">
+                      <span className="text-sm font-semibold text-black dark:text-white">
                         {user.firstName} {user.lastName}
                       </span>
-                      <span className="text-xs text-gray-500 dark:text-gray-400">
+                      <span className="text-xs text-[#19613F] dark:text-gray-400">
                         {user.email}
                       </span>
                     </div>
@@ -255,12 +255,17 @@ export function Navigation() {
                 ) : (
                   <>
                     <Link href="/auth/login">
-                      <Button variant="ghost" className="w-full">
+                      <Button
+                        variant="ghost"
+                        className="w-full text-[#19613F] hover:text-[#2CA15F]"
+                      >
                         Login
                       </Button>
                     </Link>
                     <Link href="/auth/signup">
-                      <Button className="w-full">Sign Up</Button>
+                      <Button className="w-full bg-[#19613F] hover:bg-[#2CA15F]">
+                        Sign Up
+                      </Button>
                     </Link>
                   </>
                 )}

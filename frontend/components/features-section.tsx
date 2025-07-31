@@ -48,13 +48,14 @@ const features = [
 
 export function FeaturesSection() {
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900 dark:text-card-foreground">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-[#D9D9D9] dark:bg-gradient-to-br dark:from-[#102338] dark:via-[#152a45] dark:to-[#193252] dark:text-white relative overflow-hidden">
+      <div className="absolute inset-0 opacity-5 bg-[url('/images/competition-pattern.jpg')] bg-cover bg-center mix-blend-overlay"></div>
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 dark:text-card-foreground">
+          <h2 className="text-3xl sm:text-4xl font-bold text-black mb-4 dark:text-card-foreground">
             Everything You Need to Succeed
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto dark:text-gray-300">
+          <p className="text-xl text-black max-w-3xl mx-auto dark:text-gray-300">
             From discovering competitions to hosting your own, we provide all
             the tools you need for case competition success.
           </p>
@@ -64,20 +65,23 @@ export function FeaturesSection() {
           {features.map((feature, index) => (
             <Card
               key={index}
-              className="hover:shadow-lg transition-shadow duration-300"
+              className="hover:shadow-lg transition-all duration-300 border-[#19613F]/20 hover:scale-105 backdrop-blur-sm bg-white/80 dark:bg-[#1a3047]/80 dark:border-[#2CA15F]/20 dark:hover:shadow-[0_0_15px_rgba(44,161,95,0.2)]"
             >
               <CardHeader>
                 <div className="flex items-center space-x-3">
-                  <div className="p-2 bg-primary/10 rounded-lg">
-                    <feature.icon className="h-6 w-6 text-primary" />
+                  <div className="p-3 bg-[#19613F]/10 rounded-lg flex items-center justify-center">
+                    <feature.icon className="h-7 w-7 text-[#19613F]" />
                   </div>
-                  <CardTitle className="text-xl">{feature.title}</CardTitle>
+                  <CardTitle className="text-xl font-bold">
+                    {feature.title}
+                  </CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
-                <CardDescription className="text-gray-600">
+                <CardDescription className="text-black dark:text-gray-200 text-base">
                   {feature.description}
                 </CardDescription>
+                <div className="mt-4 w-16 h-1 bg-[#2CA15F] rounded-full"></div>
               </CardContent>
             </Card>
           ))}

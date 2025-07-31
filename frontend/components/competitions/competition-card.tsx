@@ -74,7 +74,7 @@ export function CompetitionCard({
 
   return (
     <>
-      <Card className="hover:shadow-lg transition-shadow duration-300 cursor-pointer">
+      <Card className="hover:shadow-lg transition-shadow duration-300 cursor-pointer h-full flex flex-col">
         <CardHeader className="pb-4">
           <div className="flex items-start justify-between">
             <div className="flex items-center space-x-3">
@@ -83,7 +83,7 @@ export function CompetitionCard({
                 alt={`${competition.organizer} logo`}
                 width={48}
                 height={48}
-                className="rounded-lg"
+                className="rounded-lg object-cover"
               />
               <div>
                 <h3 className="font-semibold text-lg line-clamp-2">
@@ -121,7 +121,7 @@ export function CompetitionCard({
           </div>
         </CardHeader>
 
-        <CardContent className="space-y-3">
+        <CardContent className="space-y-3 flex-grow">
           <p className="text-sm text-gray-600 line-clamp-2">
             {competition.description}
           </p>
@@ -143,18 +143,20 @@ export function CompetitionCard({
           </div>
         </CardContent>
 
-        <CardFooter className="pt-4">
+        <CardFooter className="pt-4 mt-auto">
           <div className="flex w-full gap-2">
             <Button
               variant="outline"
-              className="flex-1 bg-transparent"
+              className="flex-1 bg-transparent hover:bg-gray-50 dark:hover:bg-gray-800"
               onClick={() => setDialogOpen(true)}
             >
               View Details
             </Button>
             {competition.applicationType === "internal" ? (
               <Link href={competition.applyUrl} className="flex-1">
-                <Button className="w-full">Apply Now</Button>
+                <Button className="w-full bg-[#2CA15F] hover:bg-[#19613F]">
+                  Apply Now
+                </Button>
               </Link>
             ) : (
               <a
@@ -163,7 +165,7 @@ export function CompetitionCard({
                 rel="noopener noreferrer"
                 className="flex-1"
               >
-                <Button className="w-full">
+                <Button className="w-full bg-[#2CA15F] hover:bg-[#19613F]">
                   Apply
                   <ExternalLink className="h-4 w-4 ml-1" />
                 </Button>
@@ -175,7 +177,7 @@ export function CompetitionCard({
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <Dialog.Overlay className="fixed inset-0 bg-black/40 dark:bg-black/80 backdrop-blur-sm z-50" />
         <Dialog.Content className="fixed inset-0 flex items-center justify-center z-50 animate-fade-in animate-scale-up">
-          <Card className="max-w-lg w-full p-6 relative bg-white dark:bg-card text-card-foreground dark:text-card-foreground shadow-xl">
+          <Card className="max-w-lg w-full p-6 relative bg-white dark:bg-card text-card-foreground dark:text-card-foreground shadow-xl rounded-xl">
             <Button
               variant="ghost"
               size="icon"

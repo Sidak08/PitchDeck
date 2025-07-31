@@ -11,37 +11,37 @@ import { Trophy } from "lucide-react";
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
+    <div className="min-h-screen flex items-center justify-center bg-[#D9D9D9] dark:bg-gradient-to-br dark:from-[#102338] dark:via-[#152a45] dark:to-[#193252] py-16 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-10">
         <div className="text-center">
           <Link
             href="/"
-            className="flex items-center justify-center space-x-2 mb-6"
+            className="flex items-center justify-center space-x-3 mb-8"
           >
-            <Trophy className="h-8 w-8 text-primary" />
+            <Trophy className="h-9 w-9 text-[#19613F] dark:text-[#2CA15F]" />
             <span className="font-bold text-xl gradient-text">
               The Pitch Deck
             </span>
           </Link>
         </div>
 
-        <Card>
-          <CardHeader>
+        <Card className="border-[#19613F]/20 dark:border-[#2CA15F]/30 dark:bg-gray-900/90 dark:backdrop-blur-sm">
+          <CardHeader className="pb-2">
             <CardTitle className="text-2xl font-bold text-center">
               Welcome Back
             </CardTitle>
-            <CardDescription className="text-center">
+            <CardDescription className="text-center pt-2">
               Sign in to your account to continue
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="pt-4">
             <LoginForm />
-            <div className="mt-6 text-center">
+            <div className="mt-8 text-center">
               <p className="text-sm text-gray-600">
                 Don&apos;t have an account?{" "}
                 <Link
                   href="/auth/signup"
-                  className="font-medium text-primary hover:text-primary/80"
+                  className="font-medium text-[#19613F] hover:text-[#2CA15F] dark:text-[#2CA15F] dark:hover:text-[#3dd67f]"
                 >
                   Sign up here
                 </Link>

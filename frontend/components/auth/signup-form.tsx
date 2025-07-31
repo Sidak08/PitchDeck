@@ -98,32 +98,49 @@ export function SignupForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-6">
       <div className="grid grid-cols-2 gap-4">
-        <div>
-          <Label htmlFor="firstName">First Name</Label>
+        <div className="space-y-2">
+          <Label
+            htmlFor="firstName"
+            className="block mb-1 text-[#19613F] dark:text-[#2CA15F] font-medium"
+          >
+            First Name
+          </Label>
           <Input
             id="firstName"
             value={formData.firstName}
             onChange={(e) => handleChange("firstName", e.target.value)}
             required
             placeholder="John"
+            className="mt-1 bg-white/90 border-[#19613F]/20 focus:border-[#2CA15F] dark:bg-gray-800/50 dark:border-[#2CA15F]/30 dark:text-white dark:placeholder:text-gray-400"
           />
         </div>
-        <div>
-          <Label htmlFor="lastName">Last Name</Label>
+        <div className="space-y-2">
+          <Label
+            htmlFor="lastName"
+            className="block mb-1 text-[#19613F] dark:text-[#2CA15F] font-medium"
+          >
+            Last Name
+          </Label>
           <Input
             id="lastName"
             value={formData.lastName}
             onChange={(e) => handleChange("lastName", e.target.value)}
             required
             placeholder="Doe"
+            className="mt-1 bg-white/90 border-[#19613F]/20 focus:border-[#2CA15F] dark:bg-gray-800/50 dark:border-[#2CA15F]/30 dark:text-white dark:placeholder:text-gray-400"
           />
         </div>
       </div>
 
-      <div>
-        <Label htmlFor="email">Email</Label>
+      <div className="space-y-2">
+        <Label
+          htmlFor="email"
+          className="block mb-1 text-[#19613F] dark:text-[#2CA15F] font-medium"
+        >
+          Email
+        </Label>
         <Input
           id="email"
           type="email"
@@ -131,28 +148,40 @@ export function SignupForm() {
           onChange={(e) => handleChange("email", e.target.value)}
           required
           placeholder="john@example.com"
+          className="mt-1 bg-white/90 border-[#19613F]/20 focus:border-[#2CA15F] dark:bg-gray-800/50 dark:border-[#2CA15F]/30 dark:text-white dark:placeholder:text-gray-400"
         />
       </div>
 
-      <div>
-        <Label htmlFor="school">School</Label>
+      <div className="space-y-2">
+        <Label
+          htmlFor="school"
+          className="block mb-1 text-[#19613F] dark:text-[#2CA15F] font-medium"
+        >
+          School
+        </Label>
         <Input
           id="school"
           value={formData.school}
           onChange={(e) => handleChange("school", e.target.value)}
           required
           placeholder="Your High School"
+          className="mt-1 bg-white/90 border-[#19613F]/20 focus:border-[#2CA15F] dark:bg-gray-800/50 dark:border-[#2CA15F]/30 dark:text-white dark:placeholder:text-gray-400"
         />
       </div>
 
-      <div>
-        <Label htmlFor="grade">Grade</Label>
+      <div className="space-y-2">
+        <Label
+          htmlFor="grade"
+          className="block mb-1 text-[#19613F] dark:text-[#2CA15F] font-medium"
+        >
+          Grade
+        </Label>
         <Select
           value={formData.grade}
           onValueChange={(value) => handleChange("grade", value)}
           required
         >
-          <SelectTrigger>
+          <SelectTrigger className="mt-1 bg-white/90 border-[#19613F]/20 focus:border-[#2CA15F] dark:bg-gray-800/50 dark:border-[#2CA15F]/30 dark:text-white">
             <SelectValue placeholder="Select your grade" />
           </SelectTrigger>
           <SelectContent>
@@ -164,8 +193,13 @@ export function SignupForm() {
         </Select>
       </div>
 
-      <div>
-        <Label htmlFor="role">Role</Label>
+      <div className="space-y-2">
+        <Label
+          htmlFor="role"
+          className="block mb-1 text-[#19613F] dark:text-[#2CA15F] font-medium"
+        >
+          Role
+        </Label>
         <Select
           value={formData.role}
           onValueChange={(value) => {
@@ -174,7 +208,7 @@ export function SignupForm() {
           }}
           required
         >
-          <SelectTrigger>
+          <SelectTrigger className="mt-1 bg-white/90 border-[#19613F]/20 focus:border-[#2CA15F] dark:bg-gray-800/50 dark:border-[#2CA15F]/30 dark:text-white">
             <SelectValue placeholder="Select your role" />
           </SelectTrigger>
           <SelectContent>
@@ -184,8 +218,13 @@ export function SignupForm() {
         </Select>
       </div>
 
-      <div>
-        <Label htmlFor="password">Password</Label>
+      <div className="space-y-2">
+        <Label
+          htmlFor="password"
+          className="block mb-1 text-[#19613F] dark:text-[#2CA15F] font-medium"
+        >
+          Password
+        </Label>
         <Input
           id="password"
           type="password"
@@ -193,11 +232,17 @@ export function SignupForm() {
           onChange={(e) => handleChange("password", e.target.value)}
           required
           placeholder="Create a password"
+          className="mt-1 bg-white/90 border-[#19613F]/20 focus:border-[#2CA15F] dark:bg-gray-800/50 dark:border-[#2CA15F]/30 dark:text-white dark:placeholder:text-gray-400"
         />
       </div>
 
-      <div>
-        <Label htmlFor="confirmPassword">Confirm Password</Label>
+      <div className="space-y-2">
+        <Label
+          htmlFor="confirmPassword"
+          className="block mb-1 text-[#19613F] dark:text-[#2CA15F] font-medium"
+        >
+          Confirm Password
+        </Label>
         <Input
           id="confirmPassword"
           type="password"
@@ -205,30 +250,41 @@ export function SignupForm() {
           onChange={(e) => handleChange("confirmPassword", e.target.value)}
           required
           placeholder="Confirm your password"
+          className="mt-1 bg-white/90 border-[#19613F]/20 focus:border-[#2CA15F] dark:bg-gray-800/50 dark:border-[#2CA15F]/30 dark:text-white dark:placeholder:text-gray-400"
         />
       </div>
 
       {/* Terms and Conditions */}
-      <div className="flex items-center space-x-2 text-sm">
+      <div className="flex items-start space-x-3 mt-4 text-sm">
         <Checkbox
           id="agreeToTerms"
           checked={agreeToTerms}
           onCheckedChange={(checked) => setAgreeToTerms(!!checked)}
           required
+          className="mt-0.5"
         />
-        <Label htmlFor="agreeToTerms" className="text-sm">
+        <Label
+          htmlFor="agreeToTerms"
+          className="text-sm leading-tight text-gray-700 dark:text-gray-300"
+        >
           I agree to the{" "}
-          <Link href="/terms" className="text-primary hover:underline">
+          <Link
+            href="/terms"
+            className="text-[#19613F] hover:text-[#2CA15F] dark:text-[#2CA15F] dark:hover:text-[#3dd67f] hover:underline"
+          >
             T&C
           </Link>
           {" and "}
-          <Link href="/privacy" className="text-primary hover:underline">
+          <Link
+            href="/privacy"
+            className="text-[#19613F] hover:text-[#2CA15F] dark:text-[#2CA15F] dark:hover:text-[#3dd67f] hover:underline"
+          >
             privacy policy
           </Link>
         </Label>
       </div>
       {formData.role === "organizer" && (
-        <div className="bg-yellow-100 border-l-4 border-yellow-400 text-yellow-800 p-3 rounded text-sm mb-2">
+        <div className="bg-yellow-100 border-l-4 border-yellow-400 text-yellow-800 p-4 rounded-md text-sm my-4 dark:bg-yellow-900/30 dark:border-yellow-600 dark:text-yellow-200">
           If you want to be an organizer, you must contact us at{" "}
           <a href="mailto:example@site.com" className="underline font-medium">
             example@site.com
@@ -236,7 +292,11 @@ export function SignupForm() {
           to get approved for an account.
         </div>
       )}
-      <Button type="submit" className="w-full" disabled={isLoading}>
+      <Button
+        type="submit"
+        className="w-full mt-6 bg-[#19613F] hover:bg-[#2CA15F] dark:bg-[#2CA15F] dark:hover:bg-[#19613F] transition-colors"
+        disabled={isLoading}
+      >
         {isLoading ? "Creating Account..." : "Create Account"}
       </Button>
     </form>
