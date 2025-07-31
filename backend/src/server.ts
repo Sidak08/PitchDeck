@@ -20,11 +20,20 @@ app.use(
       "Authorization",
       "Access-Control-Allow-Origin",
     ],
-  })
+  }),
 );
 
 app.use(cookieParser());
 app.use(express.json());
+
+// Redirect routes
+app.get("/dashboard/competitor/competitions", (req, res) => {
+  res.redirect("http://localhost:3000/dashboard/competitions");
+});
+
+app.get("/dashboard/competitor/applications", (req, res) => {
+  res.redirect("https://tally.so/r/mOxbXY");
+});
 
 app.use("/api/auth", authRoutes);
 app.use("/api/competitions", competitionRoutes);
@@ -33,13 +42,18 @@ const PORT = process.env.PORT || 8000;
 const MONGO_URI =
   process.env.MONGO_URI || "mongodb://localhost:27017/pitchdeck";
 
+// Start the server regardless of MongoDB connection
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
+// Connect to MongoDB
 mongoose
   .connect(MONGO_URI)
   .then(() => {
-    app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
-    });
+    console.log("Connected to MongoDB");
   })
   .catch((err) => {
     console.error("MongoDB connection error:", err);
+    console.log("Server is running but database functionality will be limited");
   });
