@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -30,19 +30,42 @@ export function CompetitionFilters({
   const [gradeFilter, setGradeFilter] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
   const [showFavourites, setShowFavourites] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Handle client-side hydration
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Update filters when any value changes
   React.useEffect(() => {
-    onFiltersChange({
-      searchTerm,
-      gradeFilter,
-      statusFilter,
-      showFavourites,
-    });
-  }, [searchTerm, gradeFilter, statusFilter, showFavourites, onFiltersChange]);
+    if (isMounted) {
+      onFiltersChange({
+        searchTerm,
+        gradeFilter,
+        statusFilter,
+        showFavourites,
+      });
+    }
+  }, [
+    searchTerm,
+    gradeFilter,
+    statusFilter,
+    showFavourites,
+    onFiltersChange,
+    isMounted,
+  ]);
+
+  // Return an empty placeholder until client-side hydration is complete
+  if (!isMounted) {
+    return <div className="mb-8 relative z-20"></div>;
+  }
 
   return (
-    <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-sm border border-[#19613F]/20 dark:border-[#2CA15F]/30 mb-8 relative z-20">
+    <div
+      className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-sm border border-[#19613F]/20 dark:border-[#2CA15F]/30 mb-8 relative z-20"
+      suppressHydrationWarning
+    >
       <div className="flex flex-col lg:flex-row gap-4 items-center">
         <div className="flex-1 relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#19613F] dark:text-[#2CA15F] h-4 w-4" />

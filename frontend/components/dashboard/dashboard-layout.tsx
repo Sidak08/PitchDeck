@@ -132,6 +132,20 @@ export function DashboardLayout({ children, role }: DashboardLayoutProps) {
 
   const navigationItems = getNavigationItems();
 
+  // Ensure consistent rendering between server and client
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Return null or a loading state until client-side hydration is complete
+  if (!isMounted) {
+    return (
+      <div className="min-h-screen bg-[#D9D9D9] dark:bg-gradient-to-br dark:from-[#102338] dark:via-[#152a45] dark:to-[#193252]"></div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-[#D9D9D9] dark:bg-gradient-to-br dark:from-[#102338] dark:via-[#152a45] dark:to-[#193252] flex flex-col lg:flex-row overflow-hidden">
       {/* Mobile sidebar */}
@@ -207,7 +221,10 @@ export function DashboardLayout({ children, role }: DashboardLayoutProps) {
 
       {/* Main content */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-        <div className="sticky top-0 z-50 flex-shrink-0 flex h-16 bg-white dark:bg-gray-900 dark:text-white shadow-md">
+        <div
+          suppressHydrationWarning
+          className="sticky top-0 z-50 flex-shrink-0 flex h-16 bg-white dark:bg-gray-900 dark:text-white shadow-md"
+        >
           <button
             type="button"
             className="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#2CA15F] lg:hidden dark:border-gray-700 dark:text-gray-300"
@@ -287,7 +304,10 @@ export function DashboardLayout({ children, role }: DashboardLayoutProps) {
           </div>
         </div>
 
-        <main className="flex-1 bg-[#D9D9D9] dark:bg-gradient-to-br dark:from-[#102338] dark:via-[#152a45] dark:to-[#193252] min-h-[calc(100vh-4rem)] overflow-y-auto">
+        <main
+          suppressHydrationWarning
+          className="flex-1 bg-[#D9D9D9] dark:bg-gradient-to-br dark:from-[#102338] dark:via-[#152a45] dark:to-[#193252] min-h-[calc(100vh-4rem)] overflow-y-auto"
+        >
           <div className="py-4">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               {children}

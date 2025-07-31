@@ -5,6 +5,7 @@ import axios from "axios";
 import { CompetitionFilters } from "@/components/competitions/competition-filters";
 import { CompetitionCard } from "@/components/competitions/competition-card";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 interface Competition {
   _id: string;
@@ -25,6 +26,8 @@ interface Competition {
 }
 
 export function CompetitorDashboard() {
+  const router = useRouter();
+  const [isMounted, setIsMounted] = useState(false);
   const [firstName, setFirstName] = useState<string>("");
   const [competitions, setCompetitions] = useState<Competition[]>([]);
   const [filters, setFilters] = useState({
@@ -36,6 +39,8 @@ export function CompetitorDashboard() {
   const [favourites, setFavourites] = useState<string[]>([]);
 
   useEffect(() => {
+    setIsMounted(true);
+
     axios
       .get("http://localhost:5000/api/auth/me", { withCredentials: true })
       .then((res) => {
@@ -57,7 +62,7 @@ export function CompetitorDashboard() {
       .catch((err) => {
         setFirstName("");
         if (err.response?.status === 401 || err.response?.status === 403) {
-          window.location.href = "/";
+          router.push("/");
         }
       });
     axios
@@ -68,7 +73,7 @@ export function CompetitorDashboard() {
       .catch(() => {
         setCompetitions([]);
       });
-  }, []);
+  }, [router]);
 
   const filteredCompetitions = competitions.filter((comp) => {
     const matchesSearch =
@@ -105,8 +110,13 @@ export function CompetitorDashboard() {
     }
   };
 
+  // Return a loading state or empty div until client-side hydration is complete
+  if (!isMounted) {
+    return <div className="space-y-6"></div>;
+  }
+
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" suppressHydrationWarning>
       <div className="relative z-20 py-4 bg-[#D9D9D9] dark:bg-gradient-to-br dark:from-[#102338] dark:via-[#152a45] dark:to-[#193252]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">

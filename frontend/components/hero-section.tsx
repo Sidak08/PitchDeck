@@ -3,8 +3,20 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Trophy, Users, Award } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export function HeroSection() {
+  const router = useRouter();
+
+  const handlePitchDeckSignUp = () => {
+    if (process.env.NEXT_PUBLIC_UNDER_CONSTRUCTION === "true") {
+      // Redirect to Tally.so form
+      window.location.href = "https://tally.so/r/mOxbXY";
+    } else {
+      // Use the internal application page
+      router.push("/apply/pitch-deck");
+    }
+  };
   return (
     <section className="pt-20 pb-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#D9D9D9] via-white to-[#D9D9D9] dark:from-[#0c1a2e] dark:via-[#102338] dark:to-[#152a45] dark:text-white relative">
       <div className="absolute inset-0 opacity-10 bg-[url('/images/hero-pattern.jpg')] bg-cover bg-center mix-blend-overlay"></div>
@@ -30,15 +42,14 @@ export function HeroSection() {
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
-            <Link href="/apply/pitch-deck">
-              <Button
-                size="lg"
-                variant="outline"
-                className="text-lg px-8 py-3 bg-transparent border-[#19613F] text-[#19613F] hover:bg-[#19613F] hover:text-white"
-              >
-                Sign Up for The Pitch Deck&apos;s Competition
-              </Button>
-            </Link>
+            <Button
+              size="lg"
+              variant="outline"
+              className="text-lg px-8 py-3 bg-transparent border-[#19613F] text-[#19613F] hover:bg-[#19613F] hover:text-white"
+              onClick={handlePitchDeckSignUp}
+            >
+              Sign Up for The Pitch Deck&apos;s Competition
+            </Button>
           </div>
 
           {/* Stats Section */}
