@@ -4,7 +4,7 @@
   "installCommand": "pnpm install --no-frozen-lockfile",
   "framework": "nextjs",
   "outputDirectory": ".next",
-  "ignoreCommand": "exit 0",
+
   "env": {
     "NEXT_PUBLIC_API_URL": "https://pitchdeck-ddnd.onrender.com"
   },

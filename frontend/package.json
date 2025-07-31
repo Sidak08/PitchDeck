@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "build:vercel": "next build --no-lint",
+    "build:vercel": "NODE_OPTIONS=--max_old_space_size=4096 next build --no-lint",
     "start": "next start",
     "lint": "next lint"
   },
