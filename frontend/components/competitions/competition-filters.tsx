@@ -42,7 +42,7 @@ export function CompetitionFilters({
   }, [searchTerm, gradeFilter, statusFilter, showFavourites, onFiltersChange]);
 
   return (
-    <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-sm border border-[#19613F]/20 dark:border-[#2CA15F]/30 mb-8 sticky top-16 z-30">
+    <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-sm border border-[#19613F]/20 dark:border-[#2CA15F]/30 mb-8 relative z-20">
       <div className="flex flex-col lg:flex-row gap-4 items-center">
         <div className="flex-1 relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#19613F] dark:text-[#2CA15F] h-4 w-4" />

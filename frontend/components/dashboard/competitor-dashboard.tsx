@@ -107,9 +107,9 @@ export function CompetitorDashboard() {
 
   return (
     <div className="space-y-6">
-      <div className="sticky top-16 z-20 pt-6 pb-4 bg-[#D9D9D9] dark:bg-gradient-to-br dark:from-[#102338] dark:via-[#152a45] dark:to-[#193252] mb-2">
+      <div className="relative z-20 py-4 bg-[#D9D9D9] dark:bg-gradient-to-br dark:from-[#102338] dark:via-[#152a45] dark:to-[#193252]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
             {`Welcome back${firstName ? ", " + firstName : ""}!`}
           </h1>
           <p className="text-gray-600 dark:text-gray-300">
