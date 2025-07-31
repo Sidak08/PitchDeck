@@ -21,7 +21,23 @@ export function ApiExample() {
       setLoading(true);
       setError(null);
 
-      // Use a common endpoint that should be available
+      // First try a direct fetch to test CORS
+      const corsTest = await fetch(
+        "https://pitchdeck-ddnd.onrender.com/api/competitions",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          mode: "cors",
+        },
+      );
+
+      if (!corsTest.ok) {
+        throw new Error(`CORS test failed with status: ${corsTest.status}`);
+      }
+
+      // If CORS is working, then try with our API utility
       const result = await api.get("/api/competitions");
 
       setResponse({
@@ -31,15 +47,32 @@ export function ApiExample() {
     } catch (err: any) {
       console.error("API connection error:", err);
 
+      let errorMessage = "Failed to connect to the API. Please try again.";
+      let errorDetails = "";
+
+      if (
+        err.name === "NetworkError" ||
+        err.message.includes("Network Error")
+      ) {
+        errorMessage = "Network error: Cannot reach the API server";
+        errorDetails =
+          "This may be due to CORS restrictions or the server being down.";
+      } else if (err.response) {
+        errorMessage = `Server responded with status: ${err.response.status}`;
+        errorDetails =
+          err.response.data?.message || JSON.stringify(err.response.data);
+      } else if (err.request) {
+        errorMessage = "No response received from server";
+        errorDetails = "The request was sent but no response was received.";
+      } else {
+        errorDetails = err.message;
+      }
+
       setResponse({
-        error: "Connection failed",
+        error: errorMessage,
       });
 
-      setError(
-        err.response?.data?.message ||
-          err.message ||
-          "Failed to connect to the API. Please try again.",
-      );
+      setError(errorDetails);
     } finally {
       setLoading(false);
     }
@@ -74,7 +107,22 @@ export function ApiExample() {
                 </p>
               )}
 
-              {error && <p className="text-sm mt-2 text-red-500">{error}</p>}
+              {error && (
+                <div className="mt-2 text-sm text-red-500">
+                  <p className="font-semibold">Error Details:</p>
+                  <p className="mt-1">{error}</p>
+
+                  <div className="mt-2 p-2 bg-black/5 dark:bg-white/5 rounded">
+                    <p className="text-xs text-red-400">Troubleshooting:</p>
+                    <ul className="list-disc pl-4 text-xs mt-1">
+                      <li>Check if backend server is running</li>
+                      <li>Verify CORS is properly configured</li>
+                      <li>Check that the API endpoint is correct</li>
+                      <li>Ensure network connectivity</li>
+                    </ul>
+                  </div>
+                </div>
+              )}
 
               {response.data && (
                 <div className="mt-2">
@@ -103,6 +151,17 @@ export function ApiExample() {
               {process.env.NEXT_PUBLIC_API_URL ||
                 "https://pitchdeck-ddnd.onrender.com"}
               (Endpoint: /api/competitions)
+              <button
+                onClick={() =>
+                  window.open(
+                    "https://pitchdeck-ddnd.onrender.com/api/competitions",
+                    "_blank",
+                  )
+                }
+                className="ml-2 text-xs text-primary underline"
+              >
+                Test Direct URL
+              </button>
             </p>
           </div>
         </div>
