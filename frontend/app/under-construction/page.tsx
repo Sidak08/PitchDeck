@@ -28,7 +28,8 @@ export default function UnderConstructionPage() {
             <div className="flex items-center justify-center mb-6 p-4 bg-[#2CA15F]/10 rounded-lg border border-[#2CA15F]">
               <AlertCircle className="h-5 w-5 text-[#19613F] mr-2" />
               <p className="text-black">
-                We're currently working on this page. Please check back soon!
+                We&apos;re currently working on this page. Please check back
+                soon!
               </p>
             </div>
             <p className="text-xl text-black mb-8 max-w-2xl mx-auto">

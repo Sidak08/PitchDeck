@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import api from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 interface ApiResponse {
   message?: string;
   error?: string;
-  data?: any;
+  data?: unknown;
 }
 
 export function ApiExample() {
@@ -44,7 +44,7 @@ export function ApiExample() {
         message: "API connection successful!",
         data: result.data.slice(0, 3), // Only show first few items to avoid cluttering the UI
       });
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("API connection error:", err);
 
       let errorMessage = "Failed to connect to the API. Please try again.";

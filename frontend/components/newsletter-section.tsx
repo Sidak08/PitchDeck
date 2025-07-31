@@ -2,7 +2,7 @@
 
 import type React from "react";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Mail } from "lucide-react";
@@ -13,7 +13,7 @@ import {
   FloatingElements,
   ParallaxElement,
 } from "@/components/animations";
-import { motion, useAnimation } from "framer-motion";
+import { motion } from "framer-motion";
 
 export function NewsletterSection() {
   const [email, setEmail] = useState("");

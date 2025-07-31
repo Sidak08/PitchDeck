@@ -29,7 +29,8 @@ export const FloatingElements: React.FC<FloatingElementsProps> = ({
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [elements, setElements] = useState<FloatingElement[]>([]);
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+  // Track container dimensions for element positioning
+  const [, setDimensions] = useState({ width: 0, height: 0 });
 
   // Generate random elements
   useEffect(() => {

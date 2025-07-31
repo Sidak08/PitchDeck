@@ -5,7 +5,6 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 import { Search, Calendar, Trophy, Users, BookOpen, Award } from "lucide-react";
 import {

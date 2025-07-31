@@ -9,7 +9,6 @@ interface CursorTrailProps {
   trailLength?: number;
   trailColor?: string;
   trailFadeOut?: boolean;
-  smoothFactor?: number;
   enabled?: boolean;
 }
 
@@ -19,11 +18,12 @@ export const CursorTrail: React.FC<CursorTrailProps> = ({
   trailLength = 8,
   trailColor = "rgba(44, 161, 95, 0.4)",
   trailFadeOut = true,
-  smoothFactor = 0.2,
   enabled = true,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const [trailDots, setTrailDots] = useState<Array<{ x: number; y: number }>>([]);
+  const [trailDots, setTrailDots] = useState<Array<{ x: number; y: number }>>(
+    [],
+  );
 
   // Use motion values for smooth cursor movement
   const mouseX = useMotionValue(0);
@@ -94,7 +94,9 @@ export const CursorTrail: React.FC<CursorTrailProps> = ({
             left: dot.x,
             top: dot.y,
             width: trailFadeOut ? size * (1 - index / trailLength) : size * 0.6,
-            height: trailFadeOut ? size * (1 - index / trailLength) : size * 0.6,
+            height: trailFadeOut
+              ? size * (1 - index / trailLength)
+              : size * 0.6,
             backgroundColor: trailColor,
             borderRadius: "50%",
             opacity: trailFadeOut ? (1 - index / trailLength) * 0.7 : 0.4,
@@ -111,31 +113,31 @@ export const CursorTrail: React.FC<CursorTrailProps> = ({
 
 // Special variant for interactive elements
 export const useInteractiveCursor = () => {
-  const [elements, setElements] = useState<HTMLElement[]>([]);
-
   useEffect(() => {
     // Find all interactive elements
-    const interactiveElements = document.querySelectorAll('a, button, [role="button"], input, select, textarea');
+    const interactiveElements = document.querySelectorAll(
+      'a, button, [role="button"], input, select, textarea',
+    );
 
-    const handleMouseEnter = (e: Event) => {
-      const cursorDot = document.querySelector('.cursor-dot');
-      if (cursorDot) cursorDot.classList.add('expand');
+    const handleMouseEnter = () => {
+      const cursorDot = document.querySelector(".cursor-dot");
+      if (cursorDot) cursorDot.classList.add("expand");
     };
 
-    const handleMouseLeave = (e: Event) => {
-      const cursorDot = document.querySelector('.cursor-dot');
-      if (cursorDot) cursorDot.classList.remove('expand');
+    const handleMouseLeave = () => {
+      const cursorDot = document.querySelector(".cursor-dot");
+      if (cursorDot) cursorDot.classList.remove("expand");
     };
 
-    interactiveElements.forEach(el => {
-      el.addEventListener('mouseenter', handleMouseEnter);
-      el.addEventListener('mouseleave', handleMouseLeave);
+    interactiveElements.forEach((el) => {
+      el.addEventListener("mouseenter", handleMouseEnter);
+      el.addEventListener("mouseleave", handleMouseLeave);
     });
 
     return () => {
-      interactiveElements.forEach(el => {
-        el.removeEventListener('mouseenter', handleMouseEnter);
-        el.removeEventListener('mouseleave', handleMouseLeave);
+      interactiveElements.forEach((el) => {
+        el.removeEventListener("mouseenter", handleMouseEnter);
+        el.removeEventListener("mouseleave", handleMouseLeave);
       });
     };
   }, []);

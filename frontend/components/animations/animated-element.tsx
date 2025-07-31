@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion, AnimatePresence, Variant } from "framer-motion";
+import { motion, AnimatePresence, Variants, Transition } from "framer-motion";
 
 export interface AnimatedElementProps {
   children: React.ReactNode;
@@ -19,12 +19,12 @@ export interface AnimatedElementProps {
   className?: string;
   once?: boolean;
   viewport?: { once?: boolean; amount?: number };
-  custom?: any;
-  transition?: any;
+  custom?: Record<string, unknown>;
+  transition?: Record<string, unknown>;
 }
 
 // Animation variants
-const animations = {
+const animations: Record<string, Variants> = {
   fadeIn: {
     hidden: { opacity: 0 },
     visible: { opacity: 1 },
@@ -47,16 +47,10 @@ const animations = {
   },
   bounce: {
     hidden: { scale: 0.6, opacity: 0 },
-    visible: (custom: any) => ({
+    visible: {
       scale: 1,
       opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 10,
-        delay: custom?.delay || 0,
-      },
-    }),
+    },
   },
   rotate: {
     hidden: { rotate: -10, opacity: 0 },
@@ -74,7 +68,6 @@ export const AnimatedElement: React.FC<AnimatedElementProps> = ({
   delay = 0,
   duration = 0.5,
   className = "",
-  once = true,
   viewport = { once: true, amount: 0.3 },
   custom,
   transition,
@@ -89,13 +82,20 @@ export const AnimatedElement: React.FC<AnimatedElementProps> = ({
       viewport={viewport}
       variants={selectedAnimation}
       transition={
-        transition || {
-          duration,
-          delay,
-          ease: "easeOut",
-        }
+        animation === "bounce"
+          ? ({
+              type: "spring",
+              stiffness: 400,
+              damping: 10,
+              delay,
+              ...transition,
+            } as Transition)
+          : transition || {
+              duration,
+              delay,
+              ease: "easeOut",
+            }
       }
-      custom={custom || { delay }}
       className={className}
     >
       {children}
@@ -106,7 +106,16 @@ export const AnimatedElement: React.FC<AnimatedElementProps> = ({
 // For components that need to animate when they mount/unmount
 export const AnimatedWrapper: React.FC<
   AnimatedElementProps & { isVisible: boolean; id?: string }
-> = ({ children, isVisible, id, animation = "fadeIn", ...props }) => {
+> = ({
+  children,
+  isVisible,
+  id,
+  animation = "fadeIn",
+  delay = 0,
+  duration = 0.5,
+  transition,
+  ...props
+}) => {
   const selectedAnimation = animations[animation];
 
   return (
@@ -118,6 +127,21 @@ export const AnimatedWrapper: React.FC<
           animate="visible"
           exit="hidden"
           variants={selectedAnimation}
+          transition={
+            animation === "bounce"
+              ? ({
+                  type: "spring",
+                  stiffness: 400,
+                  damping: 10,
+                  delay,
+                  ...transition,
+                } as Transition)
+              : transition || {
+                  duration,
+                  delay,
+                  ease: "easeOut",
+                }
+          }
           {...props}
         >
           {React.Children.only(children)}

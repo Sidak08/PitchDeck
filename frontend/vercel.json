@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "buildCommand": "pnpm install --no-frozen-lockfile && pnpm run build",
+  "buildCommand": "pnpm install --no-frozen-lockfile && pnpm run build:vercel",
   "installCommand": "pnpm install --no-frozen-lockfile",
   "framework": "nextjs",
   "outputDirectory": ".next",
+  "ignoreCommand": "exit 0",
   "env": {
     "NEXT_PUBLIC_API_URL": "https://pitchdeck-ddnd.onrender.com"
   },
