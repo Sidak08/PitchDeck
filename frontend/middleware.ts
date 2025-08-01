@@ -19,6 +19,7 @@ export function middleware(request: NextRequest) {
       "/apply",
       "/dashboard",
       "/about",
+      "/winners",
     ];
 
     // Check if the current path starts with any of the protected paths
@@ -48,5 +49,6 @@ export const config = {
     "/dashboard/:path*",
     "/dashboard",
     "/about",
+    "/winners",
   ],
 };

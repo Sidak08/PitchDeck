@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Trophy, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
+import Image from "next/image";
 
 interface FooterProps {
   className?: string;
@@ -15,7 +16,13 @@ export function Footer({ className = "" }: FooterProps) {
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <Trophy className="h-8 w-8 text-[#2CA15F] dark:text-[#3dd67f] dark:drop-shadow-[0_0_5px_rgba(44,161,95,0.5)]" />
+              <Image
+                src="/images/logo2.png"
+                alt="TPD Logo"
+                width={32}
+                height={32}
+                className="h-8 w-auto"
+              />
               <span className="font-bold text-xl">The Pitch Deck</span>
             </div>
             <p className="text-[#D9D9D9] mb-4 max-w-md dark:text-gray-300">

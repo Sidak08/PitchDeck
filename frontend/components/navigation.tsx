@@ -89,7 +89,7 @@ export function Navigation() {
             >
               <a className="flex items-center space-x-2">
                 <Image
-                  src="/images/TPD.png"
+                  src="/images/logo2.png"
                   alt="TPD Logo"
                   width={32}
                   height={32}
@@ -119,12 +119,14 @@ export function Navigation() {
               >
                 About
               </Link>
-              <Link
-                href="/winners"
-                className="text-black hover:text-[#2CA15F] px-3 py-2 rounded-md text-sm font-medium transition-colors dark:text-white"
-              >
-                Winners
-              </Link>
+              {!isUnderConstruction && (
+                <Link
+                  href="/winners"
+                  className="text-black hover:text-[#2CA15F] px-3 py-2 rounded-md text-sm font-medium transition-colors dark:text-white"
+                >
+                  Winners
+                </Link>
+              )}
               {isLoggedIn && user ? (
                 <div className="flex items-center space-x-2">
                   <Link
@@ -231,12 +233,14 @@ export function Navigation() {
             >
               About
             </Link>
-            <Link
-              href="/winners"
-              className="text-black hover:text-[#2CA15F] block px-3 py-2 rounded-md text-base font-medium dark:text-white"
-            >
-              Winners
-            </Link>
+            {!isUnderConstruction && (
+              <Link
+                href="/winners"
+                className="text-black hover:text-[#2CA15F] block px-3 py-2 rounded-md text-base font-medium dark:text-white"
+              >
+                Winners
+              </Link>
+            )}
             <div className="pt-4 pb-3 border-t border-gray-200">
               <div className="flex items-center px-3 space-x-3 border-t border-[#19613F]/20">
                 <ThemeToggle />

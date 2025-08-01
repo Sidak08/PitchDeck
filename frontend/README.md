@@ -54,6 +54,7 @@ The application includes an "under construction" mode that can be enabled by set
    - Stats section (showing competition numbers, participants, etc.)
    - Features section (About Us)
    - Champions section (Past Winners)
+   - Winners link in navigation bar
 3. Users attempting to access the following routes will be redirected to the under-construction page:
    - `/auth/login`
    - `/auth/signup`
@@ -61,6 +62,7 @@ The application includes an "under construction" mode that can be enabled by set
    - `/apply`
    - `/dashboard` (and all sub-routes)
    - `/about`
+   - `/winners`
 
 This feature is useful during development or when specific sections of the site are not ready for public use.
 
