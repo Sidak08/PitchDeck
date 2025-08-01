@@ -7,13 +7,19 @@ import { Footer } from "@/components/footer";
 import { CursorProvider } from "@/components/cursor-provider";
 
 export default function HomePage() {
+  // Check if site is under construction
+  const isUnderConstruction =
+    process.env.NEXT_PUBLIC_UNDER_CONSTRUCTION === "true";
+
   return (
     <CursorProvider>
       <div className="min-h-screen">
         <Navigation />
         <HeroSection />
-        <FeaturesSection />
-        <PastWinnersSection />
+        {/* Only render Features (About Us) section when not in construction mode */}
+        {!isUnderConstruction && <FeaturesSection />}
+        {/* Only render Past Winners (Champions) section when not in construction mode */}
+        {!isUnderConstruction && <PastWinnersSection />}
         <NewsletterSection />
         <Footer />
       </div>

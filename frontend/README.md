@@ -49,12 +49,17 @@ The application uses the following environment variables:
 The application includes an "under construction" mode that can be enabled by setting the `NEXT_PUBLIC_UNDER_CONSTRUCTION` environment variable to `true`. When enabled:
 
 1. Login, signup, and competitions buttons will be hidden from the navigation bar
-2. Users attempting to access the following routes will be redirected to the under-construction page:
+2. The following sections will be hidden from the homepage:
+   - Stats section (showing competition numbers, participants, etc.)
+   - Features section (About Us)
+   - Champions section (Past Winners)
+3. Users attempting to access the following routes will be redirected to the under-construction page:
    - `/auth/login`
    - `/auth/signup`
    - `/competitions`
    - `/apply`
    - `/dashboard` (and all sub-routes)
+   - `/about`
 
 This feature is useful during development or when specific sections of the site are not ready for public use.
 
