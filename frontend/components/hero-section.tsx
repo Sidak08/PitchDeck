@@ -69,7 +69,7 @@ export function HeroSection() {
                 >
                   <Button
                     size="lg"
-                    className="text-lg px-8 py-3 bg-[#19613F] hover:bg-[#2CA15F] dark:shadow-[0_0_15px_rgba(44,161,95,0.4)]"
+                    className="text-lg px-8 py-3 bg-[#19613F] hover:bg-[#2CA15F] dark:shadow-[0_0_15px_rgba(44,161,95,0.4)] w-full sm:w-auto"
                   >
                     Explore Cases
                     <motion.div
@@ -88,14 +88,17 @@ export function HeroSection() {
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
+                className="w-full sm:w-auto"
               >
                 <Button
                   size="lg"
                   variant="outline"
-                  className="text-lg px-8 py-3 bg-transparent border-[#19613F] text-[#19613F] hover:bg-[#19613F] hover:text-white"
+                  className="text-lg py-3 bg-transparent border-[#19613F] text-[#19613F] hover:bg-[#19613F] hover:text-white w-full sm:w-auto text-wrap px-4 sm:px-8"
                   onClick={handlePitchDeckSignUp}
                 >
-                  Sign Up for The Pitch Deck&apos;s Competition
+                  <span className="text-center">
+                    Sign Up for The Pitch Deck&apos;s Competition
+                  </span>
                 </Button>
               </motion.div>
             </div>

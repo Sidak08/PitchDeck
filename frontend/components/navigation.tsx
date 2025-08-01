@@ -4,10 +4,11 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Trophy, Construction } from "lucide-react";
+import { Menu, X, Construction } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Moon, Sun } from "lucide-react";
 import { toast } from "sonner";
+import Image from "next/image";
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,7 +25,9 @@ export function Navigation() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/auth/me", { withCredentials: true })
+      .get(process.env.NEXT_PUBLIC_API_URL + "/api/auth/me", {
+        withCredentials: true,
+      })
       .then((res) => {
         setIsLoggedIn(true);
         setUser({
@@ -44,7 +47,7 @@ export function Navigation() {
   const handleLogout = async () => {
     try {
       await axios.post(
-        "http://localhost:5000/api/auth/logout",
+        process.env.NEXT_PUBLIC_API_URL + "/api/auth/logout",
         {},
         { withCredentials: true },
       );
@@ -85,7 +88,13 @@ export function Navigation() {
               legacyBehavior
             >
               <a className="flex items-center space-x-2">
-                <Trophy className="h-8 w-8 text-[#19613F]" />
+                <Image
+                  src="/images/TPD.png"
+                  alt="TPD Logo"
+                  width={32}
+                  height={32}
+                  className="h-8 w-auto"
+                />
                 <span className="font-bold text-xl gradient-text">
                   The Pitch Deck
                 </span>
@@ -142,7 +151,7 @@ export function Navigation() {
                       {user.firstName}
                     </span>
                     <span className="text-xs text-[#19613F] dark:text-gray-400">
-                      {user.email}
+                      info@thepitchdeck.ca
                     </span>
                   </div>
                   <Button
@@ -257,7 +266,7 @@ export function Navigation() {
                         {user.firstName} {user.lastName}
                       </span>
                       <span className="text-xs text-[#19613F] dark:text-gray-400">
-                        {user.email}
+                        info@thepitchdeck.ca
                       </span>
                     </div>
                     <Button

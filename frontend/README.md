@@ -41,6 +41,7 @@ The application uses the following environment variables:
 |----------|-------------|---------|
 | `NEXT_PUBLIC_API_URL` | URL to the backend API | `https://pitchdeck-ddnd.onrender.com` |
 | `NEXT_PUBLIC_UNDER_CONSTRUCTION` | Enables "under construction" mode | `false` |
+| `VERCEL_ANALYTICS_ID` | Vercel Analytics ID (automatically set by Vercel) | N/A |
 
 ## Features
 
@@ -74,6 +75,12 @@ To enable under construction mode:
 - `/components` - Reusable React components
 - `/lib` - Utility functions and shared code
 - `/public` - Static assets like images and fonts
+
+## Analytics
+
+The application includes Vercel Analytics to track page views and other metrics. This is automatically enabled when deployed to Vercel and requires no additional configuration.
+
+The Analytics component is included in the root layout file and will automatically start tracking when the site is deployed to Vercel.
 
 ## Deployment
 

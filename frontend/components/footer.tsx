@@ -25,7 +25,7 @@ export function Footer({ className = "" }: FooterProps) {
             <div className="flex space-x-4">
               <div className="flex items-center space-x-2 text-[#D9D9D9] dark:text-gray-300">
                 <Mail className="h-4 w-4" />
-                <span>hello@thepitchdeck.com</span>
+                <span>info@thepitchdeck.ca</span>
               </div>
             </div>
           </div>
