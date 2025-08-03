@@ -1,9 +1,15 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Trophy, Users, Award } from "lucide-react";
+import { ArrowRight, Trophy, Users, Award, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import {
   AnimatedElement,
   AnimatedText,
@@ -19,15 +25,7 @@ export function HeroSection() {
   const isUnderConstruction =
     process.env.NEXT_PUBLIC_UNDER_CONSTRUCTION === "true";
 
-  const handlePitchDeckSignUp = () => {
-    if (isUnderConstruction) {
-      // Redirect to Tally.so form
-      window.location.href = "https://tally.so/r/mOxbXY";
-    } else {
-      // Use the internal application page
-      router.push("/apply/pitch-deck");
-    }
-  };
+  // No longer need this function as we're replacing it with a dropdown
   return (
     <section className="pt-20 pb-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#D9D9D9] via-white to-[#D9D9D9] dark:from-[#0c1a2e] dark:via-[#102338] dark:to-[#152a45] dark:text-white relative overflow-hidden">
       <FloatingElements count={12} />
@@ -90,16 +88,44 @@ export function HeroSection() {
                 whileTap={{ scale: 0.98 }}
                 className="w-full sm:w-auto"
               >
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="text-lg py-3 bg-transparent border-[#19613F] text-[#19613F] hover:bg-[#19613F] hover:text-white w-full sm:w-auto text-wrap px-4 sm:px-8"
-                  onClick={handlePitchDeckSignUp}
-                >
-                  <span className="text-center">
-                    Sign Up for The Pitch Deck&apos;s Competition
-                  </span>
-                </Button>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      className="py-3 bg-transparent border-[#19613F] text-[#19613F] hover:bg-[#19613F] hover:text-white w-full sm:w-auto text-wrap px-2 sm:px-6"
+                    >
+                      <span className="text-center text-base sm:text-lg">
+                        Sign Up for The Pitch Deck&apos;s Competition
+                      </span>
+                      <ChevronDown className="ml-2 h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-56">
+                    <DropdownMenuItem>
+                      <Link
+                        href={
+                          isUnderConstruction
+                            ? "https://tally.so/r/mOxbXY"
+                            : "/apply/pitch-deck"
+                        }
+                        className="w-full"
+                      >
+                        Apply for Competition
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                      <a
+                        href="https://docs.google.com/document/d/1L3lEtdi1gJQtFfdTPyYtBRkD7L74Ju9rMAo-ws0SiDI/edit?tab=t.0#heading=h.n3llscfauow"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full"
+                      >
+                        Competition Info Document
+                      </a>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </motion.div>
             </div>
           </AnimatedElement>
