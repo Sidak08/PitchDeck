@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { CompetitionFilters } from "@/components/competitions/competition-filters";
 import { CompetitionCard } from "@/components/competitions/competition-card";
@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
 interface Competition {
-  _id: string;
+  id: string;
   title: string;
   organizer: string;
   logo: string;
@@ -23,6 +23,7 @@ interface Competition {
   dates?: [string, string];
   location?: string;
   cost?: string;
+  registrationOpens?: string;
 }
 
 export function CompetitorDashboard() {
@@ -36,23 +37,41 @@ export function CompetitorDashboard() {
     statusFilter: "",
     showFavourites: false,
   });
+
+  const handleFiltersChange = useCallback(
+    (newFilters: {
+      searchTerm: string;
+      gradeFilter: string;
+      statusFilter: string;
+      showFavourites?: boolean;
+    }) => {
+      setFilters((prev) => ({
+        ...prev,
+        searchTerm: newFilters.searchTerm,
+        gradeFilter: newFilters.gradeFilter,
+        statusFilter: newFilters.statusFilter,
+        showFavourites: newFilters.showFavourites ?? false,
+      }));
+    },
+    [],
+  );
   const [favourites, setFavourites] = useState<string[]>([]);
 
   useEffect(() => {
     setIsMounted(true);
 
     axios
-      .get("http://localhost:5000/api/auth/me", { withCredentials: true })
+      .get("/api/auth/me", { withCredentials: true })
       .then((res) => {
         setFirstName(res.data.user?.firstName || "");
         // Fetch favourites after user is loaded
         axios
-          .get("http://localhost:5000/api/auth/favourites", {
+          .get("/api/auth/favourites", {
             withCredentials: true,
           })
           .then((favRes) => {
             setFavourites(
-              favRes.data.favourites.map((fav: { _id: string }) => fav._id),
+              favRes.data.favourites.map((fav: { id: string }) => fav.id),
             );
           })
           .catch(() => {
@@ -66,7 +85,7 @@ export function CompetitorDashboard() {
         }
       });
     axios
-      .get("http://localhost:5000/api/competitions")
+      .get("/api/competitions")
       .then((res) => {
         setCompetitions(res.data);
       })
@@ -88,7 +107,7 @@ export function CompetitorDashboard() {
       filters.statusFilter === "all" ||
       comp.status === filters.statusFilter;
     const matchesFavourites =
-      !filters.showFavourites || favourites.includes(comp._id);
+      !filters.showFavourites || favourites.includes(comp.id);
     return matchesSearch && matchesGrade && matchesStatus && matchesFavourites;
   });
 
@@ -98,16 +117,8 @@ export function CompetitorDashboard() {
         ? prev.filter((id) => id !== competitionId)
         : [...prev, competitionId],
     );
-    // Sync with backend
-    try {
-      await axios.post(
-        "http://localhost:5000/api/auth/favourites",
-        { competitionId },
-        { withCredentials: true },
-      );
-    } catch {
-      toast.error("Failed to update favourites. Please try again.");
-    }
+    // Note: Favourites sync disabled for local storage mode
+    // This would need backend implementation for persistent favourites
   };
 
   // Return a loading state or empty div until client-side hydration is complete
@@ -128,15 +139,15 @@ export function CompetitorDashboard() {
         </div>
       </div>
       <CompetitionFilters
-        onFiltersChange={setFilters}
+        onFiltersChange={handleFiltersChange}
         showFavouritesToggle={true}
       />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredCompetitions.map((comp) => (
           <CompetitionCard
-            key={comp._id}
+            key={comp.id}
             competition={{
-              id: comp._id,
+              id: comp.id,
               title: comp.title,
               organizer: comp.organizer,
               logo: comp.logo,
@@ -154,9 +165,10 @@ export function CompetitorDashboard() {
                   : ["N/A", "N/A"],
               location: comp.location ?? "N/A",
               cost: comp.cost ?? "N/A",
+              registrationOpens: comp.registrationOpens,
             }}
-            isFavourited={favourites.includes(comp._id)}
-            onFavourite={() => handleFavourite(comp._id)}
+            isFavourited={favourites.includes(comp.id)}
+            onFavourite={() => handleFavourite(comp.id)}
           />
         ))}
       </div>

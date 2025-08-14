@@ -17,6 +17,7 @@ interface Competition {
   dates: [string, string];
   location: string;
   cost: string;
+  registrationOpens?: string;
 }
 
 interface CompetitionGridProps {
@@ -35,7 +36,7 @@ export function CompetitionGrid({ filters }: CompetitionGridProps) {
   useEffect(() => {
     setLoading(true);
     setError(null);
-    fetch("http://localhost:5000/api/competitions")
+    fetch("/api/competitions")
       .then((res) => res.json())
       .then((data) => {
         setCompetitions(data);

@@ -1,5 +1,4 @@
 import type { Config } from "tailwindcss";
-const plugin = require("tailwindcss/plugin");
 
 const config = {
   darkMode: "class",
@@ -20,6 +19,10 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ["var(--font-dm-sans)", "sans-serif"],
+        serif: ["var(--font-arvo)", "serif"],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

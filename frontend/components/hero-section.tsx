@@ -3,7 +3,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Trophy, Users, Award, ChevronDown } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,8 +18,6 @@ import {
 import { motion } from "framer-motion";
 
 export function HeroSection() {
-  const router = useRouter();
-
   // Check if site is under construction
   const isUnderConstruction =
     process.env.NEXT_PUBLIC_UNDER_CONSTRUCTION === "true";
@@ -35,7 +32,7 @@ export function HeroSection() {
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center animate-fade-in">
           <AnimatedElement animation="slideUp" delay={0.2}>
-            <div className="text-4xl sm:text-6xl font-bold text-black mb-6 dark:text-card-foreground">
+            <div className="text-4xl sm:text-6xl font-bold font-serif text-black mb-6 dark:text-card-foreground">
               <AnimatedText
                 text="The All-in-One Platform"
                 animation="letterByLetter"
@@ -156,7 +153,7 @@ export function HeroSection() {
                     </motion.div>
                   </div>
                   <motion.h3
-                    className="text-3xl font-bold text-[#2CA15F] mb-2 dark:text-card-foreground"
+                    className="text-3xl font-bold font-serif text-[#2CA15F] mb-2 dark:text-card-foreground"
                     initial={{ opacity: 0, scale: 0.5 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 3.0, duration: 0.5 }}
@@ -196,7 +193,7 @@ export function HeroSection() {
                     </motion.div>
                   </div>
                   <motion.h3
-                    className="text-3xl font-bold text-[#2CA15F] mb-2 dark:text-card-foreground"
+                    className="text-3xl font-bold font-serif text-[#2CA15F] mb-2 dark:text-card-foreground"
                     initial={{ opacity: 0, scale: 0.5 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 3.2, duration: 0.5 }}
@@ -236,7 +233,7 @@ export function HeroSection() {
                     </motion.div>
                   </div>
                   <motion.h3
-                    className="text-3xl font-bold text-[#2CA15F] mb-2 dark:text-card-foreground"
+                    className="text-3xl font-bold font-serif text-[#2CA15F] mb-2 dark:text-card-foreground"
                     initial={{ opacity: 0, scale: 0.5 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 3.4, duration: 0.5 }}

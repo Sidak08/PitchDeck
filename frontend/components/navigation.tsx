@@ -25,7 +25,7 @@ export function Navigation() {
 
   useEffect(() => {
     axios
-      .get(process.env.NEXT_PUBLIC_API_URL + "/api/auth/me", {
+      .get("/api/auth/me", {
         withCredentials: true,
       })
       .then((res) => {
@@ -46,11 +46,7 @@ export function Navigation() {
 
   const handleLogout = async () => {
     try {
-      await axios.post(
-        process.env.NEXT_PUBLIC_API_URL + "/api/auth/logout",
-        {},
-        { withCredentials: true },
-      );
+      await axios.post("/api/auth/logout", {}, { withCredentials: true });
       setIsLoggedIn(false);
       setUser(null);
       window.location.href = "/";
@@ -95,7 +91,7 @@ export function Navigation() {
                   height={32}
                   className="h-8 w-auto"
                 />
-                <span className="font-bold text-xl gradient-text">
+                <span className="font-bold text-xl font-serif gradient-text">
                   The Pitch Deck
                 </span>
               </a>
@@ -105,28 +101,24 @@ export function Navigation() {
           {/* Desktop Navigation */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
-              {!isUnderConstruction && (
-                <Link
-                  href="/competitions"
-                  className="text-black hover:text-[#2CA15F] px-3 py-2 rounded-md text-sm font-medium transition-colors dark:text-white"
-                >
-                  Competitions
-                </Link>
-              )}
+              <Link
+                href="/competitions"
+                className="text-black hover:text-[#2CA15F] px-3 py-2 rounded-md text-sm font-medium transition-colors dark:text-white"
+              >
+                Competitions
+              </Link>
               <Link
                 href="/about"
                 className="text-black hover:text-[#2CA15F] px-3 py-2 rounded-md text-sm font-medium transition-colors dark:text-white"
               >
                 About
               </Link>
-              {!isUnderConstruction && (
-                <Link
-                  href="/winners"
-                  className="text-black hover:text-[#2CA15F] px-3 py-2 rounded-md text-sm font-medium transition-colors dark:text-white"
-                >
-                  Winners
-                </Link>
-              )}
+              <Link
+                href="/winners"
+                className="text-black hover:text-[#2CA15F] px-3 py-2 rounded-md text-sm font-medium transition-colors dark:text-white"
+              >
+                Winners
+              </Link>
               {isLoggedIn && user ? (
                 <div className="flex items-center space-x-2">
                   <Link
@@ -219,28 +211,24 @@ export function Navigation() {
       {isOpen && (
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-[#D9D9D9] border-b border-[#19613F]/20 dark:bg-gray-900">
-            {!isUnderConstruction && (
-              <Link
-                href="/competitions"
-                className="text-black hover:text-[#2CA15F] block px-3 py-2 rounded-md text-base font-medium dark:text-white"
-              >
-                Competitions
-              </Link>
-            )}
+            <Link
+              href="/competitions"
+              className="text-black hover:text-[#2CA15F] block px-3 py-2 rounded-md text-base font-medium dark:text-white"
+            >
+              Competitions
+            </Link>
             <Link
               href="/about"
               className="text-black hover:text-[#2CA15F] block px-3 py-2 rounded-md text-base font-medium dark:text-white"
             >
               About
             </Link>
-            {!isUnderConstruction && (
-              <Link
-                href="/winners"
-                className="text-black hover:text-[#2CA15F] block px-3 py-2 rounded-md text-base font-medium dark:text-white"
-              >
-                Winners
-              </Link>
-            )}
+            <Link
+              href="/winners"
+              className="text-black hover:text-[#2CA15F] block px-3 py-2 rounded-md text-base font-medium dark:text-white"
+            >
+              Winners
+            </Link>
             <div className="pt-4 pb-3 border-t border-gray-200">
               <div className="flex items-center px-3 space-x-3 border-t border-[#19613F]/20">
                 <ThemeToggle />

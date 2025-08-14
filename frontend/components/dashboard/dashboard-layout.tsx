@@ -44,7 +44,7 @@ export function DashboardLayout({ children, role }: DashboardLayoutProps) {
 
   useEffect(() => {
     // Fetch user info for profile display
-    fetch("http://localhost:5000/api/auth/me", { credentials: "include" })
+    fetch("/api/auth/me", { credentials: "include" })
       .then((res) => res.json())
       .then((data) => {
         if (data.user) {
@@ -61,7 +61,7 @@ export function DashboardLayout({ children, role }: DashboardLayoutProps) {
 
   const handleLogout = async () => {
     try {
-      await fetch("http://localhost:5000/api/auth/logout", {
+      await fetch("/api/auth/logout", {
         method: "POST",
         credentials: "include",
       });

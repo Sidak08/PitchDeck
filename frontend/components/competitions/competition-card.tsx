@@ -28,6 +28,7 @@ interface Competition {
   dates: [string, string];
   location: string;
   cost: string;
+  registrationOpens?: string;
 }
 
 interface CompetitionCardProps {
@@ -224,6 +225,12 @@ export function CompetitionCard({
                 <div>
                   <strong>Cost:</strong> {competition.cost}
                 </div>
+                {competition.registrationOpens && (
+                  <div>
+                    <strong>Registration Opens:</strong>{" "}
+                    {competition.registrationOpens}
+                  </div>
+                )}
               </div>
               <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-300">
                 <div className="flex items-center space-x-1">

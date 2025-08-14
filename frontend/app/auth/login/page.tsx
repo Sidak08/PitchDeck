@@ -19,7 +19,7 @@ export default function LoginPage() {
             className="flex items-center justify-center space-x-3 mb-8"
           >
             <Trophy className="h-9 w-9 text-[#19613F] dark:text-[#2CA15F]" />
-            <span className="font-bold text-xl gradient-text">
+            <span className="font-bold text-xl font-serif gradient-text">
               The Pitch Deck
             </span>
           </Link>
@@ -27,7 +27,7 @@ export default function LoginPage() {
 
         <Card className="border-[#19613F]/20 dark:border-[#2CA15F]/30 dark:bg-gray-900/90 dark:backdrop-blur-sm">
           <CardHeader className="pb-2">
-            <CardTitle className="text-2xl font-bold text-center">
+            <CardTitle className="text-2xl font-bold font-serif text-center">
               Welcome Back
             </CardTitle>
             <CardDescription className="text-center pt-2">

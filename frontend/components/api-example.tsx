@@ -21,23 +21,7 @@ export function ApiExample() {
       setLoading(true);
       setError(null);
 
-      // First try a direct fetch to test CORS
-      const corsTest = await fetch(
-        "https://pitchdeck-ddnd.onrender.com/api/competitions",
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          mode: "cors",
-        },
-      );
-
-      if (!corsTest.ok) {
-        throw new Error(`CORS test failed with status: ${corsTest.status}`);
-      }
-
-      // If CORS is working, then try with our API utility
+      // Test local Next.js API routes
       const result = await api.get("/api/competitions");
 
       setResponse({
@@ -50,22 +34,29 @@ export function ApiExample() {
       let errorMessage = "Failed to connect to the API. Please try again.";
       let errorDetails = "";
 
+      const error = err as Error & {
+        response?: { status: number; data?: { message?: string } };
+        request?: unknown;
+        name?: string;
+        message?: string;
+      };
+
       if (
-        err.name === "NetworkError" ||
-        err.message.includes("Network Error")
+        error?.name === "NetworkError" ||
+        error?.message?.includes("Network Error")
       ) {
         errorMessage = "Network error: Cannot reach the API server";
         errorDetails =
           "This may be due to CORS restrictions or the server being down.";
-      } else if (err.response) {
-        errorMessage = `Server responded with status: ${err.response.status}`;
+      } else if (error?.response) {
+        errorMessage = `Server responded with status: ${error.response.status}`;
         errorDetails =
-          err.response.data?.message || JSON.stringify(err.response.data);
-      } else if (err.request) {
+          error.response.data?.message || JSON.stringify(error.response.data);
+      } else if (error?.request) {
         errorMessage = "No response received from server";
         errorDetails = "The request was sent but no response was received.";
       } else {
-        errorDetails = err.message;
+        errorDetails = error?.message || "Unknown error occurred";
       }
 
       setResponse({
@@ -128,7 +119,9 @@ export function ApiExample() {
                 <div className="mt-2">
                   <p className="text-sm font-semibold">Response Data:</p>
                   <pre className="mt-1 text-xs p-2 bg-black/10 dark:bg-white/10 rounded overflow-auto">
-                    {JSON.stringify(response.data, null, 2)}
+                    {typeof response.data === "string"
+                      ? response.data
+                      : JSON.stringify(response.data, null, 2)}
                   </pre>
                 </div>
               )}
@@ -147,17 +140,9 @@ export function ApiExample() {
                   : "Idle"}
             </p>
             <p className="mt-1 text-xs">
-              API URL:{" "}
-              {process.env.NEXT_PUBLIC_API_URL ||
-                "https://pitchdeck-ddnd.onrender.com"}
-              (Endpoint: /api/competitions)
+              API URL: Local Next.js API (Endpoint: /api/competitions)
               <button
-                onClick={() =>
-                  window.open(
-                    "https://pitchdeck-ddnd.onrender.com/api/competitions",
-                    "_blank",
-                  )
-                }
+                onClick={() => window.open("/api/competitions", "_blank")}
                 className="ml-2 text-xs text-primary underline"
               >
                 Test Direct URL
