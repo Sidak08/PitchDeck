@@ -93,32 +93,30 @@ export function HeroSection() {
                       className="py-3 bg-transparent border-[#19613F] text-[#19613F] hover:bg-[#19613F] hover:text-white w-full sm:w-auto text-wrap px-2 sm:px-6"
                     >
                       <span className="text-center text-base sm:text-lg">
-                        Sign Up for The Pitch Deck&apos;s Competition
+                        National Executive Recruitment
                       </span>
                       <ChevronDown className="ml-2 h-4 w-4" />
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-56">
                     <DropdownMenuItem>
-                      <Link
-                        href={
-                          isUnderConstruction
-                            ? "https://tally.so/r/mOxbXY"
-                            : "/apply/pitch-deck"
-                        }
-                        className="w-full"
-                      >
-                        Apply for Competition
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>
                       <a
-                        href="https://docs.google.com/document/d/1L3lEtdi1gJQtFfdTPyYtBRkD7L74Ju9rMAo-ws0SiDI/edit?tab=t.0#heading=h.n3llscfauow"
+                        href="https://forms.gle/EpMfZ9W7YWezhoL56"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-full"
                       >
-                        Competition Info Document
+                        Apply Now
+                      </a>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                      <a
+                        href="https://docs.google.com/document/d/17UVO4x1qkW-bstwDQ_oEX6tDxiYXryjoCwtVffZXmmE/edit?usp=sharing"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full"
+                      >
+                        Info Document
                       </a>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
