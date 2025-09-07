@@ -135,7 +135,7 @@ export function CompetitionCard({
         </CardHeader>
 
         {/* Main Content Section */}
-        <CardContent className="flex-grow space-y-4 p-6 bg-gradient-to-b from-white to-green-50 dark:from-gray-900 dark:to-green-950">
+        <CardContent className="flex-grow space-y-4 p-6 bg-white dark:bg-gray-900">
           {/* Title */}
           <div className="bg-green-50 dark:bg-green-900/50 p-3 rounded-lg border border-green-200 dark:border-green-700 h-20 flex items-center justify-center">
             <h3 className="font-bold text-lg text-center text-gray-900 dark:text-white leading-tight line-clamp-2">
