@@ -94,16 +94,16 @@ export function CompetitionCard({
           <div className="flex items-center justify-between">
             <Badge
               variant="secondary"
-              className="bg-[#19613F] text-white dark:bg-[#2CA15F] dark:text-green-900 font-semibold"
+              className="bg-[#19613F] text-white dark:bg-[#2CA15F] dark:text-green-900 font-semibold text-sm"
             >
               {competition.gradeEligibility}
             </Badge>
             <div className="flex items-center space-x-2">
               <div className="text-right">
-                <p className="text-xs text-gray-600 dark:text-gray-300 font-medium">
+                <p className="text-sm text-gray-600 dark:text-gray-300 font-medium">
                   Deadline
                 </p>
-                <p className="text-sm font-semibold text-gray-800 dark:text-gray-100">
+                <p className="text-base font-semibold text-gray-800 dark:text-gray-100">
                   {formatDate(competition.deadline)}
                 </p>
               </div>
